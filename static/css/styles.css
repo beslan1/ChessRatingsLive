@@ -1,0 +1,461 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@700&display=swap');
+
+/* Общие стили */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Кастомный шрифт для заголовка */
+.font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Шахматный фон */
+.chess-board-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            to right,
+            #355E3B,
+            #355E3B 50px,
+            #F0EAD6,
+            #F0EAD6 100px
+        ),
+        repeating-linear-gradient(
+            to bottom,
+            transparent,
+            transparent 50px,
+            #F0EAD6 50px,
+            #F0EAD6 100px
+        );
+    background-blend-mode: difference;
+    opacity: 0.09;
+    z-index: -1;
+}
+
+/* Стили таблицы */
+.table-container {
+    position: relative;
+    z-index: 20;
+    overflow-x: auto !important;
+}
+
+#players-table {
+    width: 100% !important;
+}
+
+#players-table tr td {
+    transition: background-color 0.2s ease;
+}
+
+#players-table tbody tr:hover td {
+    background-color: #e5e7eb;
+}
+
+#players-table th,
+#players-table td {
+    line-height: 1.25;
+}
+
+#players-table th:nth-child(1),
+#players-table td:nth-child(1),
+#players-table th:nth-child(3),
+#players-table td:nth-child(3),
+#players-table th:nth-child(4),
+#players-table td:nth-child(4),
+#players-table th:nth-child(5),
+#players-table td:nth-child(5),
+#players-table th:nth-child(6),
+#players-table td:nth-child(6) {
+    text-align: center !important;
+}
+
+#players-table th:nth-child(2) {
+    text-align: center;
+}
+
+#players-table td:nth-child(2) {
+    text-align: left;
+}
+
+#players-table th:nth-child(1),
+#players-table td:nth-child(1) {
+    min-width: 40px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+
+#players-table th:nth-child(2),
+#players-table td:nth-child(2) {
+    min-width: 250px !important;
+    font-size: 1.125rem;
+    padding-left: 5px !important;
+    padding-right: 10px !important;
+}
+
+#players-table th:nth-child(3),
+#players-table td:nth-child(3) {
+    min-width: 80px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+#players-table th:nth-child(4),
+#players-table td:nth-child(4) {
+    min-width: 60px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    font-size: 1.125rem;
+}
+
+#players-table th:nth-child(5),
+#players-table td:nth-child(5) {
+    min-width: 60px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+#players-table th:nth-child(6),
+#players-table td:nth-child(6) {
+    min-width: 60px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+#players-table td:nth-child(4) {
+    font-weight: 600;
+    color: #1e40af;
+}
+
+#players-table td:nth-child(5) {
+    font-weight: 500;
+}
+
+#players-table td:nth-child(5):before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+
+#players-table td:nth-child(5)[data-change^="+"]:before {
+    background-color: #16a34a;
+}
+
+#players-table td:nth-child(5)[data-change^="-"]:before {
+    background-color: #dc2626;
+}
+
+#players-table td:nth-child(5)[data-change="0"]:before {
+    background-color: #6b7280;
+}
+
+/* Стили для сортировки */
+th.sort-asc::after {
+    content: ' ↑';
+    color: #1e40af;
+}
+
+th.sort-desc::after {
+    content: ' ↓';
+    color: #1e40af;
+}
+
+/* Баннер в шапке */
+.header-banner {
+    width: 100%;
+    max-width: 1920px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+    .header-banner {
+        width: 100%;
+        max-height: 150px;
+    }
+}
+
+/* Стили для кнопок фильтров в шапке таблицы */
+.rating-filter-btn.active {
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+}
+
+/* Контейнер кнопок в шапке */
+.rating-filter-container {
+    scrollbar-width: thin;
+    scrollbar-color: #9ca3af #e5e7eb;
+}
+
+.rating-filter-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.rating-filter-container::-webkit-scrollbar-track {
+    background: #e5e7eb;
+}
+
+.rating-filter-container::-webkit-scrollbar-thumb {
+    background: #9ca3af;
+    border-radius: 4px;
+}
+
+.rating-filter-container::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* Фиксированная ширина и центрирование кнопок */
+.rating-filter-btn {
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* Фиксированная ширина подписей */
+.rating-filter-label {
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* Футер */
+.footer-container {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    min-height: 200px;
+}
+
+.footer-container h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.footer-container p {
+    font-size: 0.875rem; /* text-sm */
+    color: #4b5563;
+}
+
+.footer-container a {
+    transition: color 0.2s ease;
+}
+
+.footer-container i {
+    font-size: 1.25rem;
+}
+
+.footer-container img {
+    width: 1.25rem;
+    height: 1.25rem;
+    vertical-align: middle;
+}
+
+.footer-container span {
+    font-size: 0.875rem; /* text-sm */
+    color: inherit;
+}
+
+@media (max-width: 640px) {
+    .footer-container {
+        padding: 1rem;
+        min-height: 150px;
+    }
+
+    .footer-container h3 {
+        font-size: 0.875rem;
+    }
+
+    .footer-container p,
+    .footer-container span {
+        font-size: 0.75rem; /* text-xs */
+    }
+
+    .footer-container i,
+    .footer-container img {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
+/* Карточка игрока */
+.player-row:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.highlight {
+    animation: pulse 5s infinite;
+}
+
+@keyframes pulse {
+    0% { background-color: rgba(255, 255, 255, 0.9); }
+    50% { background-color: rgba(255, 215, 0, 0.3); }
+    100% { background-color: rgba(255, 255, 255, 0.9); }
+}
+
+.rating-change {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.player-card {
+    transition: all 0.3s ease;
+    transform: translateX(100%);
+    opacity: 0;
+    min-width: 200px;
+    min-height: 400px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.player-card.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.player-card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.player-card p {
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+.player-card .flex {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.player-card .flex:last-child {
+    border-bottom: none;
+}
+
+.player-card .text-gray-500 {
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.player-card .font-bold {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.selected-player {
+    background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+.federation-logo {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+}
+
+.rating-badge {
+    position: relative;
+}
+
+.rating-badge::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ef4444;
+    border: 2px solid white;
+}
+
+.rating-badge.online::after {
+    background-color: #10b981;
+}
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+/* Улучшение компактности карточки игрока */
+.player-card .space-y-3 > div {
+    padding: 0.4rem 0;
+    font-size: 0.85rem;
+}
+
+/* Разделение рейтингов для наглядности */
+.player-card .flex[id*="fshr"],
+.player-card .flex[id*="fide"] {
+    background-color: #f9fafb;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 2px;
+}
+
+/* Заголовки рейтингов */
+.player-card .text-gray-500[id*="fshr"],
+.player-card .text-gray-500[id*="fide"] {
+    font-weight: 600;
+    color: #374151;
+}
+
+/* Значения рейтингов */
+.player-card .font-bold[id*="fshr"],
+.player-card .font-bold[id*="fide"] {
+    color: #1e40af;
+}
+
+/* Стили для иконки короны */
+.fa-crown {
+    transition: transform 0.2s ease;
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.3)); /* Добавляем тень */
+}
+
+.fa-crown:hover {
+    transform: scale(1.3); /* Увеличиваем эффект масштабирования */
+}
