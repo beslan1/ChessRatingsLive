@@ -1,0 +1,423 @@
+/* base.css - Полная переписанная версия */
+
+/* Импорт шрифтов */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Базовые стили для body */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease, background-image 0.3s ease;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* Общая структура */
+.header-banner {
+    border-radius: 8px;
+}
+.filter-buttons { 
+    display: grid; 
+    gap: 8px; 
+    align-items: center; 
+}
+.filter-info-search { 
+    display: flex; 
+    gap: 8px; 
+    align-items: stretch; 
+}
+#filter-info { 
+    font-weight: bold; 
+    text-align: center; 
+    border-radius: 4px; 
+    padding: 8px; 
+    min-width: 160px; 
+    height: 40px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    transition: background-color 0.2s ease-out, color 0.2s ease-out; 
+}
+.search-container { 
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    height: 40px; 
+    flex: 1; 
+    min-width: 100px;
+}
+#name-search { 
+    height: 40px; 
+    padding: 8px 8px 8px 40px; 
+    font-size: 14px; 
+    width: 100%; 
+    border-radius: 4px; 
+    outline: none;
+}
+.search-container .bi-search { 
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    left: 10px; 
+    font-size: 18px; 
+    cursor: pointer; 
+    z-index: 10; 
+    padding: 10px; 
+}
+
+/* СТРУКТУРА ТАБЛИЦ */
+.table-container { 
+    position: relative; 
+    z-index: 5; 
+    overflow-x: auto; 
+    border-radius: 6px;
+}
+.table-container table {
+    width: 100%; 
+    table-layout: auto; 
+    border-collapse: collapse; 
+}
+.table-container thead th, 
+.table-container th.tournament-title-header {
+    padding: 8px 8px; 
+    text-align: center !important; 
+    font-weight: 500; 
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 18px; 
+    white-space: nowrap;
+}
+tbody#players-table td {
+    padding:12px 8px; 
+    line-height: 1.4; 
+    vertical-align: middle;
+}
+tbody#players-table td:nth-child(4), 
+tbody#players-table td.font-semibold { 
+    font-weight: 600;
+}
+tbody#players-table tr {
+    transition: background-color 0.2s ease;
+}
+.table-container th[data-sort-key] { cursor: pointer; } /* ИЗМЕНЕНО */
+.fa-medal { margin-left: 8px; font-size: 1.1em; }
+td.rating-positive { font-weight: 700; }
+td.rating-negative { font-weight: 700; }
+.table-container th:nth-child(1), tbody#players-table td:nth-child(1) { min-width: 40px; text-align: center; }
+/* Выравнивание для колонок ОСНОВНОЙ таблицы рейтинга */
+#table-container th:nth-child(2), 
+#table-container tbody#players-table td:nth-child(2) { 
+    text-align: left; 
+    min-width: 200px; 
+    font-size: 15px; 
+}
+.table-container th:nth-child(3), tbody#players-table td:nth-child(3),
+.table-container th:nth-child(4), tbody#players-table td:nth-child(4),
+.table-container th:nth-child(5), tbody#players-table td:nth-child(5),
+.table-container th:nth-child(6), tbody#players-table td:nth-child(6) { text-align: center; min-width: 70px; }
+
+/* Фильтры рейтинга (ФШР/FIDE) */
+.rating-filter-container { 
+    display: flex; flex-wrap: nowrap; gap: 6px; padding: 6px; border-radius: 6px; overflow-x: auto; scrollbar-width: thin;
+}
+.rating-filter-label { 
+    font-size: 16px; font-weight: 500; font-family: 'Montserrat', sans-serif; text-align: center; min-width: auto; padding-right: 4px; display: flex; align-items: center;
+}
+.rating-filter-btn { 
+    font-family: 'Roboto', sans-serif; font-weight: 500; font-size: 13px; padding: 6px 10px; border-radius: 4px; height: 32px; line-height: 1; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; cursor: pointer; min-width: auto; white-space: nowrap;
+}
+
+/* Модальные окна */
+#tournament-modal { transition: opacity 0.3s ease; z-index: 1050; }
+.compact-tournament-modal { width: 900px; max-width: 90vw; margin: 0 auto; max-height: 80vh; overflow-y: auto; display: flex; flex-direction: column; }
+#tournament-select.compact-tournament-select { font-size: 18px; height: auto; max-height: 700px; flex-grow: 1; overflow-y: auto; display: block; }
+
+
+/* ================================================================== */
+/* --- НОВЫЕ СТИЛИ ДЛЯ ПРАВОЙ КОЛОНКИ --- */
+/* ================================================================== */
+
+/* Общий стиль для всех карточек в правой колонке */
+#top-achievers-container,
+#player-card,
+#champions-card,
+#tournament-summary-card,
+.footer-container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Карточка игрока */
+#player-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 450px;
+    padding: 1rem;
+}
+#player-card h2#player-name {
+    flex-shrink: 0;
+}
+#player-card .info-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+#player-card .info-container p {
+    font-size: 0.875rem; display: flex; justify-content: space-between;
+    padding: 2px 0; flex-basis: 47%;
+}
+#player-card .info-container p span:first-child { font-weight: 500; margin-right: 0.5rem; }
+#player-card .info-container p span:last-child { font-weight: 600; text-align: right; }
+
+/* Карточка саммари турнира */
+#tournament-summary-card {
+    display: flex; 
+    flex-direction: column;
+    min-height: 600px;
+}
+#tournament-summary-content {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Логика отображения правой колонки */
+body:not(.tournament-view-active) #tournament-summary-card {
+    display: none;
+}
+/* В режиме турнира (`.tournament-view-active` на body)... */
+
+/* ...НАДЕЖНО ПРЯЧЕМ каждую из остальных карточек отдельным правилом */
+body.tournament-view-active #top-achievers-container {
+    display: none;
+}
+body.tournament-view-active #player-card {
+    display: none;
+}
+body.tournament-view-active #champions-card {
+    display: none;
+}
+body.tournament-view-active .footer-container {
+    display: none;
+}
+
+/* Стили для карточки Топ-10 (заменили класс на ID) */
+#top-achievers-container h3 { text-align: center; font-size: 1.5rem; font-weight: 600; color: #2d3748; margin-bottom: 1rem; }
+#top-achievers-container ol { list-style: none; padding-left: 0; counter-reset: top-achievers-counter; }
+#top-achievers-container li { display: flex; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid #edf2f7; counter-increment: top-achievers-counter; font-size: 0.9rem; }
+#top-achievers-container li:last-child { border-bottom: none; }
+#top-achievers-container li::before { content: counter(top-achievers-counter); font-weight: 700; font-size: 1.1rem; min-width: 2rem; text-align: right; margin-right: 1rem; color: #718096; }
+.achiever-medals { margin-left: auto; display: flex; gap: 0.75rem; font-size: 0.9rem; }
+.medal-count { display: inline-block; min-width: 50px; text-align: left; }
+
+
+/* ================================================================== */
+/* --- ОСТАЛЬНЫЕ СТИЛИ (ФУТЕР, СРАВНЕНИЕ, ИСТОРИЯ И Т.Д.) --- */
+/* ================================================================== */
+
+.footer-container { padding: 1rem; }
+.footer-container .grid { display: grid; grid-template-columns: 3fr 2fr; gap: 1rem; margin-bottom: 0.5rem; }
+.footer-container .flex.items-sm { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+.footer-container a { transition: opacity 0.2s ease; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+.footer-container a:hover { opacity: 0.8; }
+.footer-container i, .footer-container img { font-size: 22px; width: 22px; height: 22px; }
+.footer-container span { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 600; }
+.footer-container .copyright-container { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; font-weight: 500; justify-content: center; margin-top: 1rem; padding-top: 0.5rem; }
+.vk-link-text { max-width: none; font-size: 0.80rem; line-height: 1.2; text-align: left; white-space: normal; }
+.pagination-btn { font-family: 'Roboto', sans-serif; font-weight: 500; font-size: 14px; padding: 0 10px; border-radius: 1px; height: 22px; line-height: 20px; transition: all 0.2s ease; cursor: pointer; min-width: 32px; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; }
+.pagination-btn.active { font-weight: 700; }
+.pagination-btn.disabled { cursor: not-allowed; }
+#pagination span { padding: 0 8px; font-size: 14px; }
+.theme-switcher-container { position: fixed; bottom: 20px; right: 20px; z-index: 1000; }
+.theme-switcher { display: flex; gap: 8px; }
+.theme-btn { padding: 8px 12px; border-radius: 4px; font-size: 1.1rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; }
+.simple-theme-header { display: none; }
+.comparison-report { display: flex; flex-direction: column; gap: 1.5rem; }
+.report-block { padding: 1rem; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); }
+.report-block h3 { font-size: 1.5rem; font-weight: 600; text-align: center; margin-bottom: 1rem; color: #2d3748; }
+.report-info-card { flex-grow: 1; min-width: 290px; max-width: 360px; background: #f7fafc; color: #1a202c; padding: 0.75rem 1rem; border-radius: 12px; border: 1px solid #e2e8f0; }
+.report-info-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: #1a202c; }
+.report-info-card p { display: flex; justify-content: space-between; font-size: 0.9rem; padding: 0.25rem 0; border-bottom: 1px solid #e2e8f0; }
+.history-filters { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; padding: 4px; }
+.history-filter-btn { padding: 6px 12px; border-radius: 6px; border: 1px solid #ccc; background-color: #f0f0f0; color: #333; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.2s ease; }
+.history-filter-btn:hover { border-color: #999; background-color: #e9e9e9; }
+.history-filter-btn.active { background-color: #0d6efd; color: white; border-color: #0a58ca; }
+/* ================================================================== */
+/* --- СТИЛИ ДЛЯ СТРАНИЦЫ СРАВНЕНИЯ (ИСПРАВЛЕННАЯ ВЕРСИЯ) --- */
+/* ================================================================== */
+
+#comparison-view .comparison-report {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+#comparison-view .report-block {
+    padding: 1rem;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+#comparison-view .report-block h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #2d3748;
+}
+#comparison-view .report-row-presentation { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 1rem; 
+    flex-wrap: wrap; 
+}
+#comparison-view .presentation-vs { 
+    font-size: 2.9rem; 
+    font-weight: 700; 
+    color: #424750; 
+    flex-shrink: 0; 
+}
+#comparison-view .report-info-card {
+    flex-grow: 1; 
+    min-width: 290px; 
+    max-width: 360px;
+    background: #f7fafc;
+    color: #1a202c;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+}
+#comparison-view .report-info-card h3 { 
+    font-size: 1.45rem; 
+    font-weight: 700;
+    margin-bottom: 0.75rem; 
+    color: #b80070; 
+    text-align: center;
+}
+#comparison-view .report-info-card p { 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 0.9rem; 
+    padding: 0.25rem 0; 
+    border-bottom: 1px solid #e2e8f0; 
+}
+#comparison-view .report-info-card p span:first-child { 
+    color: #718096; 
+}
+#comparison-view .report-info-card p span:last-child { 
+    font-weight: 600; 
+}
+#comparison-view .center-stats-table { 
+    width: 100%; 
+    max-width: 450px; 
+    margin: 0 auto;
+    color: #2d3748; 
+}
+#comparison-view .center-stats-table th { 
+    color: #4a5568; 
+    font-size: 0.9rem; 
+    padding: 0.4rem; 
+    font-weight: 500;
+}
+#comparison-view .center-stats-table td { 
+    font-size: 1.1rem; 
+    font-weight: bold; 
+    padding: 0.4rem; 
+}
+#comparison-view .h2h-section { 
+    text-align: center; 
+}
+#comparison-view .h2h-score { 
+    font-size: 2.2rem; 
+    font-weight: 700; 
+    color: #1a202c; 
+}
+#comparison-view .h2h-draws { 
+    color: #718096; 
+    font-size: 0.9rem; 
+}
+#comparison-view .final-score-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+#comparison-view .final-score-value {
+    font-size: 4.5rem;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+}
+#comparison-view .final-score-dash {
+    font-size: 3rem;
+    font-weight: 300;
+    color: #a0aec0;
+}
+#comparison-view .stat-better { 
+    color: #38a169; 
+}
+#comparison-view .stat-worse { 
+    color: #e53e3e; 
+}
+
+/* Медиа-запросы */
+@media (max-width: 768px) { 
+    #pagination { justify-content: flex-start; width: 100%; } 
+    .filter-buttons { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); } 
+    #filter-info, .search-container { min-width: 100%; } 
+    .compact-tournament-modal { max-height: 500px; } 
+    #tournament-select.compact-tournament-select { max-height: 400px; }
+    #tournament-summary-card { min-height: 450px; } 
+}
+@media (min-width: 768px) { 
+    #filter-info { min-width: 200px; } 
+}
+@media (max-width: 640px) { 
+    .filter-buttons { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); } 
+    .table-container th:nth-child(2), tbody#players-table td:nth-child(2) { min-width: 150px; font-size: 14px; } 
+}
+/* ================================================================ */
+/* ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ АДАПТИВНОСТИ                         */
+/* ================================================================ */
+
+/* Правила для планшетов и мобильных устройств (ширина до 768px) */
+@media (max-width: 768px) {
+
+    /* 1. Делаем карточки сравнения вертикальными */
+    #comparison-view .report-row-presentation {
+        flex-direction: column;
+        gap: 1.5rem; /* Добавляем отступ между карточками */
+    }
+    
+    /* Убираем большой знак "VS" на мобильных */
+    #comparison-view .presentation-vs {
+        display: none;
+    }
+    
+    /* 2. Уменьшаем отступы на карточках в правой колонке */
+    #player-card,
+    #champions-card,
+    #top-achievers-container,
+    .footer-container {
+        padding: 0.75rem; /* 12px вместо 16px */
+    }
+}
+
+/* Правила для очень маленьких экранов (ширина до 480px) */
+@media (max-width: 480px) {
+
+    /* 3. Уменьшаем шрифт в основной таблице для лучшей читаемости */
+    .table-container th, 
+    .table-container td {
+        font-size: 13px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    /* Имя игрока делаем чуть крупнее, чтобы выделялось */
+    .table-container th:nth-child(2), 
+    tbody#players-table td:nth-child(2) {
+        font-size: 14px;
+    }
+}

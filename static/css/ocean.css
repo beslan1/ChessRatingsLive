@@ -1,0 +1,296 @@
+/* ============================================= */
+/* --- Полная тема "Ocean" (Матовое стекло) --- */
+/* ============================================= */
+
+/* 1. Определяем цветовую палитру и параметры темы */
+body.theme-ocean {
+    
+    --bg-image: url('../images/bg-ocean.png');
+    --text-color: #1a1a1a;
+    --text-color-subtle: #666666;
+    --text-color-link: #000000;
+
+    /* Стили для "матовых стеклянных" панелей */
+    --glass-bg-color: rgba(255, 255, 255, 0.4);
+    --glass-border-color: rgba(255, 255, 255, 0.6);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+    --glass-blur: 10px;
+
+    /* Цвета для кнопок */
+    --button-bg-color: rgba(255, 255, 255, 0.2);
+    --button-text-color: var(--text-color);
+    
+    /* Акцентный цвет для наведения */
+    --hover-accent-color: #00BFFF; /* Сочный голубой (DeepSkyBlue) */
+
+    /* Цвета для таблицы */
+    --header-bg-color: rgba(255, 255, 255, 0.5);
+    --header-text-color: #1a1a1a;
+    --row-even-bg-color: rgba(255, 255, 255, 0.15);
+    --row-hover-bg-color: rgba(0, 191, 255, 0.2); /* Полупрозрачный голубой для наведения на строки */
+    --row-border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 2. Применяем базовые стили темы */
+body.theme-ocean {
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--text-color);
+}
+
+/* 3. Управление баннером */
+body.theme-ocean .header-banner {
+    display: none;
+}
+body.theme-ocean .simple-theme-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.2rem;
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.2rem;
+    text-transform: capitalize;
+    letter-spacing: 0.1em;
+    background: var(--glass-bg-color);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border-color);
+    box-shadow: var(--glass-shadow);
+    border-radius: 8px;
+    color: var(--text-color);
+}
+@media (max-width: 640px) {
+    body.theme-ocean .simple-theme-header {
+        font-size: 1.5rem;
+    }
+}
+
+/* 4. Стили для остальных элементов */
+body.theme-ocean .table-container,
+body.theme-ocean #placeholder-image, 
+body.theme-ocean .player-card,
+body.theme-ocean #tournament-summary-card,
+body.theme-ocean .champions-card,
+body.theme-ocean .footer-container, 
+body.theme-ocean #filter-info,
+body.theme-ocean #name-search,
+body.theme-ocean .filter-buttons button,
+body.theme-ocean .rating-filter-btn,
+body.theme-ocean #tournament-modal .compact-tournament-modal {
+    background: var(--glass-bg-color);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border-color);
+    box-shadow: var(--glass-shadow);
+    border-radius: 8px; /* Единый радиус */
+}
+
+body.theme-ocean #name-search, body.theme-ocean #filter-info { color: var(--text-color); }
+body.theme-ocean #name-search::placeholder { color: var(--text-color-subtle); }
+
+/* Кнопки */
+body.theme-ocean .filter-buttons button:hover,
+body.theme-ocean .rating-filter-btn:hover {
+    background-color: var(--hover-accent-color);
+    color: #ffffff; /* Белый текст при наведении для контраста с голубым фоном */
+}
+body.theme-ocean .filter-buttons button.active,
+body.theme-ocean .rating-filter-btn.active {
+    background-color: var(--hover-accent-color);
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+/* Таблица */
+body.theme-ocean .table-container thead th {
+    background: transparent;
+    color: var(--header-text-color);
+    border-bottom: 2px solid var(--row-border-color);
+}
+body.theme-ocean .table-container thead th[onclick]:hover {
+    background-color: var(--hover-accent-color);
+    color: #ffffff;
+}
+body.theme-ocean tbody#players-table tr { background-color: transparent !important; }
+body.theme-ocean tbody#players-table tr:nth-child(even) { background-color: var(--row-even-bg-color) !important; }
+body.theme-ocean tbody#players-table tr:hover { background-color: var(--row-hover-bg-color) !important; }
+body.theme-ocean tbody#players-table td {
+    color: var(--text-color);
+    border-bottom: 1px solid var(--row-border-color);
+}
+body.theme-ocean tbody#players-table td.font-semibold { color: #005A9C; }
+
+/* Пагинация */
+body.theme-ocean .pagination-btn:hover {
+    background-color: var(--hover-accent-color);
+    color: #ffffff;
+}
+body.theme-ocean .pagination-btn.active {
+    background-color: var(--hover-accent-color);
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+/* И другие специфичные стили... */
+body.theme-ocean #champions-title { color: var(--text-color); }
+body.theme-ocean .champion-block,
+body.theme-ocean .champion-block-wide {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-bottom: 1px solid var(--row-border-color);
+}
+body.theme-ocean .footer-container a,
+body.theme-ocean .footer-container span,
+body.theme-ocean .footer-container i {
+    color: var(--text-color) !important;
+}
+
+
+body.theme-ocean .top-achievers-card {
+    padding: 0.8rem 1rem; /* Добавим внутренние отступы */
+}
+
+/* Заголовок и кнопка "Все" */
+body.theme-ocean .top-achievers-card h3 {
+    color: var(--text-color);
+    margin: 0;
+    font-size: 1.1rem; /* Немного уменьшим для компактности */
+}
+body.theme-ocean .top-achievers-card #show-all-achievers-btn {
+    color: var(--hover-accent-color); /* Используем акцентный цвет для ссылки */
+    font-weight: 700;
+}
+
+/* Элементы списка */
+body.theme-ocean .top-achievers-card li {
+    border-bottom: 1px solid var(--row-border-color); /* Используем цвет рамки из таблицы */
+    transition: background-color 0.2s ease;
+}
+body.theme-ocean .top-achievers-card li:hover {
+    background-color: var(--row-hover-bg-color); /* Используем цвет наведения из таблицы */
+}
+
+/* Номер в списке */
+body.theme-ocean .top-achievers-card li::before {
+    color: var(--text-color-subtle); /* Приглушенный цвет для номера */
+}
+
+/* Имя и очки */
+body.theme-ocean .top-achievers-card .achiever-name,
+body.theme-ocean .top-achievers-card .achiever-medals {
+    color: var(--text-color);
+}
+
+/* Жирные цифры очков */
+body.theme-ocean .top-achievers-card .achiever-medals .font-bold {
+    color: #005A9C; /* Такой же цвет, как у рейтинга в основной таблице */
+}
+/* ========================================================== */
+/* === ИСПРАВЛЕНИЕ: Стили для фона карточки Топ-10 === */
+/* ========================================================== */
+
+body.theme-ocean .top-achievers-card {
+    background: var(--glass-bg-color);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--glass-border-color);
+    box-shadow: var(--glass-shadow);
+    border-radius: 8px;
+}
+/* ================================================== */
+/* === Стили для списка чемпионов (3 колонки)      === */
+/* ================================================== */
+
+body.theme-ocean .champions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Применяем сеточный макет к каждому элементу списка */
+body.theme-ocean .champions-list li {
+    display: grid;
+    grid-template-columns: 1.2fr 1.3fr auto; /* Дисциплина | Имя | Иконка */
+    gap: 0.75rem; /* Расстояние между колонками */
+    align-items: center;
+    padding: 0.5rem 0.2rem;
+    border-bottom: 0.4px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+body.theme-ocean .champions-list li:hover {
+    background-color: #cce7ff;
+}
+
+body.theme-ocean .champions-list li:last-child {
+    border-bottom: none;
+}
+
+/* Категория (Классика 2024 и т.д.) */
+body.theme-ocean .champion-category {
+    color: #6B7280;
+    font-size: 0.9rem;
+    text-align: left; /* Выравнивание по левому краю */
+}
+
+/* Имя чемпиона */
+body.theme-ocean .champion-name {
+    color: #333333;
+    font-weight: 600;
+    text-align: left; /* Выравнивание по правому краю для красивого отступа от иконки */
+}
+
+/* Стили самой иконки */
+body.theme-ocean .champions-list .champion-icon {
+    width: 28px;
+    height: 28px;
+}
+/* ================================================================ */
+/* Улучшения читаемости для темы "Океан" (ocean.css)         */
+/* ================================================================ */
+
+/* 1. Основной текст в таблице рейтинга */
+/* Делаем текст игроков темнее и чуть жирнее */
+body.theme-ocean tbody#players-table td {
+    color: #2d3748; /* Контрастный темно-серый */
+    font-weight: 500; /* Средний вес шрифта */
+}
+
+/* 2. Акцент на колонке с рейтингом */
+/* Делаем цифры рейтинга еще более заметными */
+body.theme-ocean tbody#players-table td:nth-child(4) {
+    font-weight: 500; /* Полужирный */
+}
+
+/* 3. Карточка игрока (справа) */
+/* Стили для названий полей (Год рождения, Звание и т.д.) */
+body.theme-ocean #player-card .info-container p span:first-child {
+    color: #4a5568; /* Темно-серый для названий */
+    font-weight: 500;
+}
+
+/* Стили для значений полей */
+body.theme-ocean #player-card .info-container p span:last-child {
+    color: #1a202c; /* Почти черный для максимального контраста */
+    font-weight: 500; /* Полужирный, чтобы выделить значение */
+}
+
+/* 4. Карточка чемпионов */
+/* Имена чемпионов делаем более жирными */
+body.theme-ocean #champions-card .champion-name {
+    color: #1a202c;
+    font-weight: 500;
+}
+
+/* 5. Карточка Топ-10 */
+/* Имена и медали в списке лучших */
+body.theme-ocean #top-achievers-container .achiever-name,
+body.theme-ocean #top-achievers-container .medal-count {
+    color: #2d3748;
+    font-weight: 500;
+}

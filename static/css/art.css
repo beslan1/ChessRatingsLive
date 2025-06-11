@@ -1,0 +1,273 @@
+/* art.css - Стили для темы "Art" (v3, добавлены стили таблицы) */
+
+body.theme-art { /* Изменен селектор для большей специфичности */
+    background-color: #ffffff;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    background-image: url('../images/body-bg-default.png');
+}
+
+body.theme-art .theme-btn:not(.active) { background-color: #DC2626; color: #FFFFFF; border: 2px solid #000000; }
+body.theme-art .theme-btn.active { background-color: #16A34A; color: #FFFFFF;  border: 2px solid #000000; }
+
+body.theme-art .filter-buttons button {
+    color: white;
+    border: solid 1.5px #000000;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1);
+}
+body.theme-art button#all-players { background: linear-gradient(to right, #1e40af, #3b82f6); }
+body.theme-art button#women { background: linear-gradient(to right, #ec4899, #f472b6); }
+body.theme-art button#children { background: linear-gradient(to right, #eab308, #facc15); }
+body.theme-art button#top100 { background: linear-gradient(to right, #16a34a, #22c55e); }
+body.theme-art button#tournaments { background: linear-gradient(to right, #6b21a8, #a855f7); }
+body.theme-art .filter-buttons button:hover {
+    opacity: 0.9;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.15);
+}
+body.theme-art .filter-buttons button.active {
+    opacity: 1;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.05);
+}
+
+body.theme-art #filter-info { background-color: #e9ecef; color: #212529; border: 1px solid #ced4da; }
+body.theme-art #filter-info.active-info { background-color: #0d6efd; color: #ffffff; border-color: #0a58ca; }
+body.theme-art #name-search { color: #212529; background-color: #ffffff; border: 1px solid #ced4da; }
+body.theme-art #name-search::placeholder { color: #6c757d; }
+body.theme-art .search-container .bi-search { color: #6c757d; }
+
+body.theme-art #tournament-modal .compact-tournament-modal { background-color: #ffffff; border: 1px solid #dee2e6; box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15); }
+body.theme-art #tournament-modal h2 { color: #212529; }
+body.theme-art #tournament-select.compact-tournament-select { border: 1px solid #ced4da; background-color: #ffffff; color: #212529; }
+body.theme-art #tournament-select.compact-tournament-select:focus { border-color: #86b7fe; box-shadow: 0 0 0 0.25rem rgba(13,110,253,.25); }
+body.theme-art #tournament-select.compact-tournament-select option:hover { background-color: #e9ecef; }
+body.theme-art #tournament-select.compact-tournament-select option[value=""]:disabled { color: #6c757d; }
+body.theme-art #tournament-cancel { background-color: #6c757d; color: #ffffff; }
+body.theme-art #tournament-cancel:hover { background-color: #5a6268; }
+
+body.theme-art .rating-filter-container { background-color: #e9ecef; border: 1px solid #dee2e6; scrollbar-color: #ced4da #e9ecef; }
+body.theme-art .rating-filter-label { color: #212529; }
+body.theme-art .rating-filter-btn { background-color: #ffffff; color: #212529; border: 1px solid #ced4da; }
+body.theme-art .rating-filter-btn:hover { background-color: #faf8f8; border-color: #adb5bd; }
+body.theme-art .rating-filter-btn.active { background-color: #0d6efd; color: #ffffff; border-color: #0a58ca; }
+body.theme-art .rating-filter-btn.disabled { background-color: #efe9eb; color: #7d786c; border-color: #dee2e6; }
+
+body.theme-art #placeholder-image, 
+body.theme-art #player-card, 
+body.theme-art .champions-card, 
+body.theme-art .footer-container { background-color: #ffffff; border: 1px solid #dee2e6; box-shadow: 0 2px 4px rgba(0,0,0,0.075); }
+body.theme-art .player-card h2#player-name { color: #300d08c2; }
+body.theme-art .player-card p, 
+body.theme-art .player-card p span:last-child { color: #212529; }
+body.theme-art .player-card p span:first-child { color: #495057; }
+body.theme-art #champions-card .champions-title-container { background: #eeefe9; border-bottom: 1px solid #dee2e6; }
+body.theme-art #champions-card #champions-title { color: #1f2124; }
+body.theme-art #champions-card .champion-block, 
+body.theme-art #champions-card .champion-block-wide { background-color: #f8f9fa; border: 1px solid #dee2e6; }
+body.theme-art #champions-card .champion-name-container h3 { color: #212529; }
+body.theme-art #champions-card .champion-name-container .winner-name { color: #155d0a; }
+
+body.theme-art .footer-container a span, 
+body.theme-art .footer-container .copyright-container, 
+body.theme-art .footer-container .fa-vk, 
+body.theme-art .footer-container .fa-youtube { color: #000000; }
+body.theme-art .footer-container .copyright-container { border-top: 1px solid #dee2e6; }
+
+body.theme-art .pagination-btn { background: #ffffffab; color: #0d6efd; border: 1px solid #dee2e6; }
+body.theme-art .pagination-btn:hover:not(.disabled) { background: #e9ecef; border-color: #dee2e6; }
+body.theme-art .pagination-btn.active { background: #0d6efd; color: #ffffff; border-color: #0a58ca; }
+body.theme-art .pagination-btn.disabled { background: #e9ecef; color: #6c757d; border-color: #dee2e6; }
+body.theme-art #pagination span { color: #6c757d; }
+
+body.theme-art #tournament-summary-card {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+body.theme-art #tournament-summary-card,
+body.theme-art #tournament-summary-card h2,
+body.theme-art #tournament-summary-card .nomination-title,
+body.theme-art #tournament-summary-card .winner-value {
+    color: #212529; 
+}
+
+/* ============================================= */
+/* --- НОВЫЕ СТИЛИ ДЛЯ ТАБЛИЦЫ В ТЕМЕ ART --- */
+/* ============================================= */
+
+body.theme-art .table-container {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.075);
+}
+
+body.theme-art .table-container thead th {
+    background-color: #343a40; /* Темный заголовок для классического вида */
+    color: #ffffff;
+    border-bottom: 2px solid #212529;
+}
+
+body.theme-art .table-container thead th[onclick]:hover {
+    background-color: #495057;
+}
+
+body.theme-art .sort-icon {
+    color: #ffffff;
+}
+
+body.theme-art tbody#players-table td {
+    color: #212529;
+    border-bottom: 1px solid #e9ecef;
+}
+
+body.theme-art tbody#players-table tr.even-row {
+    background-color: #ffffff;
+}
+body.theme-art tbody#players-table tr.odd-row {
+    background-color: #f8f9fa; /* Классическая "зебра" */
+}
+
+body.theme-art tbody#players-table tr:hover {
+    background-color: #e9ecef;
+}
+
+body.theme-art tbody#players-table td:nth-child(4),
+body.theme-art tbody#players-table td.font-semibold {
+    color: #0d6efd; /* Стандартный синий для акцента на рейтинге */
+}
+
+body.theme-art tbody#players-table .fa-crown { color: #ffc107; }
+body.theme-art tbody#players-table .fa-venus { color: #ec4899; }
+body.theme-art tbody#players-table .fa-child { color: #f59e0b; }
+body.theme-art tbody#players-table td.rating-positive { color: #16a34a; }
+body.theme-art tbody#players-table td.rating-negative { color: #dc2626; }
+/* ============================================== */
+/* === Стили для карточки Топ-10 (Тема Art)    === */
+/* ============================================== */
+
+/* Применяем основной стиль панели, как у других карточек в этой теме */
+body.theme-art .top-achievers-card {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.075);
+    padding: 0.8rem 1rem;
+}
+
+/* Заголовок и кнопка "Все" */
+body.theme-art .top-achievers-card h3 {
+    color: #212529; /* Основной темный текст */
+    margin: 0;
+    font-size: 1.1rem;
+}
+body.theme-art .top-achievers-card #show-all-achievers-btn {
+    color: #0d6efd; /* Акцентный синий, как в пагинации */
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+body.theme-art .top-achievers-card #show-all-achievers-btn:hover {
+    color: #0a58ca; /* Более темный синий при наведении */
+}
+
+/* Элементы списка (строки) */
+body.theme-art .top-achievers-card li {
+    /* Разделитель, как в основной таблице */
+    border-bottom: 1px solid #e9ecef; 
+    transition: background-color 0.2s ease;
+}
+body.theme-art .top-achievers-card li:hover {
+    /* Подсветка при наведении, как у строк таблицы */
+    background-color: #e9ecef; 
+}
+body.theme-art .top-achievers-card li:last-child {
+    border-bottom: none;
+}
+
+/* Номер в списке */
+body.theme-art .top-achievers-card li::before {
+    color: #6c757d; /* Приглушенный текст */
+}
+
+/* Текст внутри строки: имя, очки, медали */
+body.theme-art .top-achievers-card .achiever-name,
+body.theme-art .top-achievers-card .medal-count {
+    color: #212529; /* Основной темный текст */
+}
+body.theme-art .top-achievers-card .achiever-medals .font-bold {
+    /* Синий цвет для акцента на очках, как рейтинг в таблице */
+    color: #0d6efd; 
+}
+/* ================================================== */
+/* === Стили для списка чемпионов (3 колонки)      === */
+/* ================================================== */
+
+body.theme-art .champions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Применяем сеточный макет к каждому элементу списка */
+body.theme-art .champions-list li {
+    display: grid;
+    grid-template-columns: 1.2fr 1.3fr auto; /* Дисциплина | Имя | Иконка */
+    gap: 0.75rem; /* Расстояние между колонками */
+    align-items: center;
+    padding: 0.5rem 0.2rem;
+    border-bottom: 0.4px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+body.theme-art .champions-list li:hover {
+    background-color: #cce7ff;
+}
+
+body.theme-art .champions-list li:last-child {
+    border-bottom: none;
+}
+
+/* Категория (Классика 2024 и т.д.) */
+body.theme-art .champion-category {
+    color: #6B7280;
+    font-size: 0.9rem;
+    text-align: left; /* Выравнивание по левому краю */
+}
+
+/* Имя чемпиона */
+body.theme-art .champion-name {
+    color: #333333;
+    font-weight: 600;
+    text-align: left; /* Выравнивание по правому краю для красивого отступа от иконки */
+}
+
+/* Стили самой иконки */
+body.theme-art .champions-list .champion-icon {
+    width: 28px;
+    height: 28px;
+}
+/* Современный спортивный стиль для кнопки "Сравнить" (Тема Art) */
+.compare-button-styled {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: none;
+
+    /* Стильный темный градиент */
+    background-image: linear-gradient(45deg, #343a40, #495057);
+    color: #ffffff;
+    box-shadow: 0 4px 15px -5px rgba(52, 58, 64, 0.6);
+}
+
+.compare-button-styled:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px -5px rgba(52, 58, 64, 0.8);
+}

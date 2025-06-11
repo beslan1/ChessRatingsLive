@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Chess Layout</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f7f3ed;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .column {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .left {
+      flex: 0 0 250px;
+    }
+
+    .center {
+      flex: 1;
+      min-width: 600px;
+    }
+
+    .right {
+      flex: 0 0 320px;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    .block {
+      margin-bottom: 20px;
+    }
+
+    footer {
+      text-align: center;
+      margin: 30px 0;
+      color: #999;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left, .right {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Левая колонка -->
+    <aside class="column left">
+      <h2>Фильтры</h2>
+      <div class="block">Все / Женщины / Дети / Топ 100</div>
+      <div class="block">ФШР / FIDE / Режимы</div>
+      <div class="block">Поиск</div>
+      <div class="block">Турниры</div>
+    </aside>
+
+    <!-- Центральная колонка -->
+    <main class="column center">
+      <h2>Таблица игроков</h2>
+      <div class="block" style="height: 600px; background: #eef;">[Таблица]</div>
+    </main>
+
+    <!-- Правая колонка -->
+    <aside class="column right">
+      <h2>Профиль игрока</h2>
+      <div class="block" style="height: 180px; background: #eee;">[Профиль или обезьянка]</div>
+
+      <h2>Чемпионы</h2>
+      <div class="block" style="max-height: 160px; overflow-y: auto; background: #fafafa;">[Список]</div>
+
+      <h2>Список турниров</h2>
+      <div class="block" style="max-height: 180px; overflow-y: auto; background: #fafafa;">[Список]</div>
+    </aside>
+  </div>
+
+  <footer>
+    SIMPLE CHESS © 2025 — All rights reserved
+  </footer>
+
+</body>
+</html>
