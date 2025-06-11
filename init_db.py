@@ -6,7 +6,7 @@ from dotenv import load_dotenv # Установим эту библиотеку 
 # Загружаем переменные из файла .env для локального теста
 load_dotenv()
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_URL = 'postgresql://simple_chess_data_user:rcP0xGV6j3D180vWJOXWCrkmV1n67fgO@dpg-d14r20uuk2gs73ci7q5g-a/simple_chess_data'
 
 if not DATABASE_URL:
     print("Ошибка: Переменная окружения DATABASE_URL не найдена.")
