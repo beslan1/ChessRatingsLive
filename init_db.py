@@ -1,16 +1,13 @@
-# Файл: init_db.py
+# Файл: init_db.py (Финальная временная версия)
 import os
 import psycopg2
-from dotenv import load_dotenv # Установим эту библиотеку для удобства
 
-# Загружаем переменные из файла .env для локального теста
-load_dotenv()
-
+# ВНИМАНИЕ: Это временное изменение только для одной инициализации!
+# Мы жестко прописываем адрес базы данных, так как другие способы не сработали.
 DATABASE_URL = 'postgresql://simple_chess_data_user:rcP0xGV6j3D180vWJOXWCrkmV1n67fgO@dpg-d14r20uuk2gs73ci7q5g-a/simple_chess_data'
 
 if not DATABASE_URL:
-    print("Ошибка: Переменная окружения DATABASE_URL не найдена.")
-    print("Для локального теста создайте файл .env и добавьте в него DATABASE_URL='...'")
+    print("Критическая ошибка: Адрес базы данных не задан.")
 else:
     try:
         print("Подключаемся к базе данных...")
