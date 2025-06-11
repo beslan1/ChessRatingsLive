@@ -1,8 +1,6 @@
--- Файл: schema.sql
+-- Файл: schema.sql (безопасная версия)
 
-DROP TABLE IF EXISTS players;
-
-CREATE TABLE players (
+CREATE TABLE IF NOT EXISTS players (
     id SERIAL PRIMARY KEY,
     fsr_id BIGINT UNIQUE NOT NULL,
     fide_id BIGINT,
