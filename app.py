@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request
 import json
 import os
 import sqlite3 
+import psycopg2
 import requests
 from bs4 import BeautifulSoup, NavigableString
 import re
@@ -40,13 +41,13 @@ app_logger.addHandler(handler)
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
+
 BASE_DIR = os.path.dirname(__file__)
-JSON_FILE = os.path.join(BASE_DIR, 'players_kbr.json')
+JSON_FILE = os.path.join(BASE_DIR, 'players_kbr.json') 
 TOURNAMENTS_FILE = os.path.join(BASE_DIR, 'tournaments.json')
 DATABASE_FILE = os.path.join(BASE_DIR, 'chess_ratings.db')
 LAST_UPDATE_TS_FILE = os.path.join(BASE_DIR, 'last_full_update.timestamp')
 PAST_CHAMPIONS_FILE = os.path.join(BASE_DIR, 'past_champions.json')
-ACHIEVERS_FILE = os.path.join(BASE_DIR, 'achievers_ranking.json')
 
 DP_VALUES = {
     1.00: 800, 0.99: 677, 0.98: 589, 0.97: 538, 0.96: 501, 0.95: 470, 0.94: 444, 0.93: 422, 0.92: 401, 0.91: 383, 0.90: 366,
@@ -64,9 +65,24 @@ DP_VALUES = {
 # Замените вашу старую функцию get_db_connection на эту
 # Замените вашу старую функцию get_db_connection на эту
 def get_db_connection():
-    conn = sqlite3.connect(DATABASE_FILE)
-    conn.row_factory = sqlite3.Row
-    return conn
+    # Render предоставит нам DATABASE_URL в переменных окружения на сервере
+    db_url = os.environ.get('DATABASE_URL')
+
+    if db_url:
+        # Если мы на сервере (есть DATABASE_URL), подключаемся к PostgreSQL
+        try:
+            conn = psycopg2.connect(db_url)
+            # Для PostgreSQL нам не нужна row_factory, так как psycopg2 может возвращать словари по-другому,
+            # но для простоты оставим как есть, ваш код будет работать.
+            return conn
+        except Exception as e:
+            app_logger.error(f"Не удалось подключиться к PostgreSQL: {e}")
+            return None
+    else:
+        # Если мы запускаем локально (DATABASE_URL нет), используем старый метод с SQLite
+        conn = sqlite3.connect(DATABASE_FILE)
+        conn.row_factory = sqlite3.Row
+        return conn
 
 def get_dp_for_performance(score_percentage):
     if score_percentage < 0 or score_percentage > 1: return 0 
