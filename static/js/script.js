@@ -183,10 +183,10 @@ function renderTopAchievers(players) {
     let html = `
         <div style="position: relative; text-align: center; margin-bottom: 0.5rem;">
             <h3 style="margin: 0; font-size: 1.25rem; font-weight: 600; display: inline-block;">
-                Топ-10
+             Топ-10
                 <span title="${tooltipText}" style="cursor: help; font-weight: normal;">ℹ️</span>
             </h3>
-            <button id="show-all-achievers-btn" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 0.875rem; font-weight: 500; color: #3b82f6; background: none; border: none; padding: 0; cursor: pointer;">Все</button>
+            <button id="show-all-achievers-btn" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 0.875rem; font-weight: 500; color: #3b82f6; background: none; border: none; padding: 0; cursor: pointer;">Общий зачет</button>
         </div>
         <ol>`;
     
@@ -199,7 +199,7 @@ function renderTopAchievers(players) {
             <li>
                 <span class="achiever-name">${shortName}</span>
                 <div class="achiever-medals">
-                    <span class="font-bold text-lg">${player.points}</span> 
+                    <span class="font-bold">${player.points}</span> 
                     <span class="medal-count">🥇 ${player.gold}</span>
                     <span class="medal-count">🥈 ${player.silver}</span>
                     <span class="medal-count">🥉 ${player.bronze}</span>
@@ -234,7 +234,7 @@ function displayAllAchievers() {
             
             // Меняем заголовок таблицы
             tableHeader.innerHTML = `
-                <tr><th colspan="6" class="py-3 px-2 text-xl text-center font-bold">Общий зачет по очкам достижений</th></tr>
+                <tr><th colspan="6" class="py-3 px-2 text-xl text-center font-bold">Общий зачет</th></tr>
                 <tr class="uppercase text-base leading-normal">
                     <th class="py-3 px-2 text-center">#</th>
                     <th class="py-3 px-2 text-left">Ф И О</th>

@@ -387,23 +387,26 @@ def update_tournaments_from_fsr():
     else:
         app_logger.warning("Не удалось получить турниры с ФШР для обновления.")
 
+#
+# ЗАМЕНИТЕ ВАШУ СТАРУЮ ФУНКЦИЮ scrape_tournament_results НА ЭТУ ВЕРСИЮ
+#
 def scrape_tournament_results(tournament_url):
     app_logger.info(f"Начало парсинга ВСЕХ ДАННЫХ турнира по URL: {tournament_url}")
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"}
     parsed_player_results = []
-    seeding_to_initial_rating = {} 
+    seeding_to_initial_rating = {}
 
     try:
-        response = requests.get(tournament_url, headers=headers, timeout=30) 
+        response = requests.get(tournament_url, headers=headers, timeout=30)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        table = soup.select_one("table.table-bordered.table-condensed") 
+        table = soup.select_one("table.table-bordered.table-condensed")
         if not table:
-            table = soup.select_one("table.table") 
+            table = soup.select_one("table.table")
             if not table:
                 app_logger.error(f"Не найдена таблица с результатами на странице: {tournament_url}")
-                return parsed_player_results
+                return []
 
         html_headers_th = table.select("thead th")
         column_indices = {}
@@ -415,14 +418,20 @@ def scrape_tournament_results(tournament_url):
             elif 'фед' in text and 'federation' not in column_indices: column_indices['federation'] = i
             elif ('имя участника' in text or 'участник' in text or 'name' in text or 'фио' in text) and 'name' not in column_indices: column_indices['name'] = i
             elif ('rнач' in text or 'r ст' in text or 'стартовый' in text) and 'initial_rating' not in column_indices: column_indices['initial_rating'] = i
-            elif text.startswith('тур ') and text.split(' ')[-1].isdigit(): round_column_indices.append(i)
+            elif text.isdigit(): round_column_indices.append(i) # Для круговиков, где заголовок - просто номер тура/соперника
             elif ('очки' in text or 'рез.' in text or 'итог' in text) and 'points' not in column_indices: column_indices['points'] = i
             elif ('место' in text or 'м-о' in text or re.match(r"^м$", text)) and 'place' not in column_indices: column_indices['place'] = i
-            elif 'rср' in text and 'avg_opponent_rating' not in column_indices: column_indices['avg_opponent_rating'] = i 
+            elif 'rср' in text and 'avg_opponent_rating' not in column_indices: column_indices['avg_opponent_rating'] = i
             elif ('rнов' in text or '+/-' in text) and 'new_rating_combined' not in column_indices: column_indices['new_rating_combined'] = i
             elif 'нор' in text and 'norm' not in column_indices: column_indices['norm'] = i
         
-        if 'start_num' not in column_indices and 'place' in column_indices : 
+        if not round_column_indices:
+             for i, th in enumerate(html_headers_th):
+                text = th.get_text(strip=True).lower()
+                if 'тур' in text and text.split(' ')[-1].isdigit(): round_column_indices.append(i)
+
+
+        if 'start_num' not in column_indices and 'place' in column_indices :
             column_indices['start_num'] = column_indices['place']
         elif 'start_num' not in column_indices:
             app_logger.warning(f"Не удалось определить колонку с номером жеребьевки/местом для {tournament_url}")
@@ -430,7 +439,7 @@ def scrape_tournament_results(tournament_url):
 
         app_logger.info(f"Определены индексы колонок для {tournament_url}: {column_indices}, туры: {round_column_indices}")
 
-        if 'name' not in column_indices or 'initial_rating' not in column_indices :
+        if 'name' not in column_indices or 'initial_rating' not in column_indices:
             app_logger.error(f"Не удалось определить ключевые колонки (имя, нач. рейтинг) для {tournament_url}. Парсинг невозможен.")
             return []
             
@@ -444,13 +453,9 @@ def scrape_tournament_results(tournament_url):
         temp_player_data_for_lookup = []
         for row_idx, row in enumerate(rows):
             cols = row.find_all("td")
-            min_cols_needed_for_lookup = 0
-            if 'name' in column_indices: min_cols_needed_for_lookup = max(min_cols_needed_for_lookup, column_indices['name'])
-            if 'initial_rating' in column_indices: min_cols_needed_for_lookup = max(min_cols_needed_for_lookup, column_indices['initial_rating'])
-            if 'start_num' in column_indices: min_cols_needed_for_lookup = max(min_cols_needed_for_lookup, column_indices['start_num'])
+            min_cols_needed = max(column_indices.get('name', 0), column_indices.get('initial_rating', 0), column_indices.get('start_num', 0))
 
-            if not cols or len(cols) <= min_cols_needed_for_lookup:
-                app_logger.warning(f"Пропуск строки {row_idx+1} из-за недостаточного количества колонок ({len(cols)}) для начального сбора в {tournament_url}")
+            if not cols or len(cols) <= min_cols_needed:
                 continue
             
             try:
@@ -468,83 +473,80 @@ def scrape_tournament_results(tournament_url):
             current_seeding_num = player_data_entry['seeding_num']
             row_idx = player_data_entry['original_row_idx']
             
-            max_used_idx_for_row = -1
-            all_indices_for_row = list(column_indices.values()) + round_column_indices
-            for idx_val in all_indices_for_row:
-                if idx_val > max_used_idx_for_row:
-                    max_used_idx_for_row = idx_val
-
-            if len(cols) <= max_used_idx_for_row : 
-                app_logger.warning(f"Строка {row_idx+1} (seeding: {current_seeding_num}) имеет меньше колонок ({len(cols)}), чем максимальный требуемый индекс ({max_used_idx_for_row}) для полного парсинга. Пропуск.")
-                continue
             try:
                 final_place = cols[column_indices['place']].get_text(strip=True) if 'place' in column_indices else str(row_idx + 1)
                 name_cell = cols[column_indices['name']]
                 player_name = name_cell.get_text(strip=True)
-                player_id_fsr = None 
+                player_id_fsr = None
                 if name_cell.find('a') and name_cell.find('a').get('href'):
                     match = re.search(r'/people/(\d+)', name_cell.find('a')['href'])
                     if match: player_id_fsr = int(match.group(1))
 
                 points_str = cols[column_indices['points']].get_text(strip=True).replace(',', '.') if 'points' in column_indices else "0"
                 points = float(points_str) if re.match(r"^-?\d+(?:\.\d+)?$", points_str) else 0.0
-                initial_rating = seeding_to_initial_rating.get(current_seeding_num, 0) 
+                initial_rating = seeding_to_initial_rating.get(current_seeding_num, 0)
                 avg_opponent_rating_val = 0
-                if 'avg_opponent_rating' in column_indices:
+                if 'avg_opponent_rating' in column_indices and column_indices['avg_opponent_rating'] < len(cols):
                     avg_opp_text = cols[column_indices['avg_opponent_rating']].get_text(strip=True)
                     if avg_opp_text.isdigit(): avg_opponent_rating_val = int(avg_opp_text)
 
-                new_rating_val = 0 
-                rating_change_val = 0 
-                if 'new_rating_combined' in column_indices:
+                new_rating_val, rating_change_val = 0, 0
+                if 'new_rating_combined' in column_indices and column_indices['new_rating_combined'] < len(cols):
                     new_rating_cell_text = cols[column_indices['new_rating_combined']].get_text(strip=True)
                     change_span = cols[column_indices['new_rating_combined']].select_one("span.rating-delta")
                     if change_span:
                         change_text_from_span = change_span.get_text(strip=True).replace('+', '').replace('−', '-')
                         try: rating_change_val = int(float(change_text_from_span))
-                        except ValueError: rating_change_val = 0; app_logger.warning(f"Не удалось распознать rating_change из span: '{change_text_from_span}' для {player_name} в {tournament_url}")
+                        except ValueError: rating_change_val = 0
                     
-                    new_rating_match = re.match(r'^\s*(\d+)', new_rating_cell_text) 
+                    new_rating_match = re.match(r'^\s*(\d+)', new_rating_cell_text)
                     if new_rating_match:
                         try: new_rating_val = int(new_rating_match.group(1))
-                        except ValueError: app_logger.warning(f"Не удалось распознать new_rating из текста: '{new_rating_cell_text}' для {player_name} в {tournament_url}")
+                        except ValueError: pass
                 
                 if new_rating_val == 0 and initial_rating > 0:
                     new_rating_val = initial_rating + rating_change_val
 
-                norm_val = cols[column_indices['norm']].get_text(strip=True) if 'norm' in column_indices else ""
+                norm_val = cols[column_indices['norm']].get_text(strip=True) if 'norm' in column_indices and column_indices['norm'] < len(cols) else ""
                 games_played_details = []
+                
                 for tour_col_idx in round_column_indices:
-                    if tour_col_idx < len(cols):
-                        game_text = cols[tour_col_idx].get_text(strip=True)
-                        if not game_text or game_text.strip() == '-':
-                            games_played_details.append({"opponent_seeding_num": None, "opponent_rating": None, "player_color": "unknown", "score": 0.0, "is_bye": False, "result_str": game_text})
-                            continue 
-                        if game_text.strip() == '+':
-                            games_played_details.append({"opponent_seeding_num": None, "opponent_rating": None, "player_color": "unknown", "score": 1.0, "is_bye": True, "result_str": game_text})
-                            continue
-                        
-                        game_match = re.match(r"(\d+)\s*([чЧбБ])\s*([10½]|0.5|1.0|0.0)", game_text.replace(',', '.'))
-                        if game_match:
-                            opp_seeding_num = int(game_match.group(1))
-                            color_char = game_match.group(2).lower()
-                            result_char = game_match.group(3)
+                    if tour_col_idx >= len(cols): continue
 
-                            player_color = "white" if color_char == 'б' else "black" if color_char == 'ч' else "unknown"
-                            score = 0.0
-                            if result_char == '1' or result_char == '1.0': score = 1.0
-                            elif result_char == '½' or result_char == '0.5': score = 0.5
-                            elif result_char == '0' or result_char == '0.0': score = 0.0
-                            
-                            opponent_initial_rating = seeding_to_initial_rating.get(opp_seeding_num)
-                            games_played_details.append({"opponent_seeding_num": opp_seeding_num, "opponent_rating": opponent_initial_rating, "player_color": player_color, "score": score, "is_bye": False, "result_str": game_text})
+                    game_text = cols[tour_col_idx].get_text(strip=True).replace(',', '.')
+                    
+                    swiss_match = re.match(r"(\d+)\s*([чЧбБwWbB])\s*([10½]|0.5|1.0|0.0)", game_text)
+                    round_robin_match = game_text in ['1', '0', '½', '0.5', '1.0', '0.0']
+                    bye_or_forfeit_match = game_text.strip() in ['+', '-']
+
+                    if swiss_match:
+                        opp_seeding_num = int(swiss_match.group(1))
+                        color_char = swiss_match.group(2).lower()
+                        result_char = swiss_match.group(3)
+                        player_color = "white" if color_char in ['б', 'w'] else "black"
+                        score = 1.0 if result_char in ['1', '1.0'] else 0.5 if result_char in ['½', '0.5'] else 0.0
+                        opponent_rating = seeding_to_initial_rating.get(opp_seeding_num)
+                        games_played_details.append({"opponent_seeding_num": opp_seeding_num, "opponent_rating": opponent_rating, "player_color": player_color, "score": score, "is_bye": False, "result_str": game_text})
+                    
+                    elif round_robin_match:
+                        header_text = html_headers_th[tour_col_idx].get_text(strip=True)
+                        opp_seeding_num_from_header = int(header_text) if header_text.isdigit() else None
+                        if opp_seeding_num_from_header:
+                            score = 1.0 if game_text in ['1', '1.0'] else 0.5 if game_text in ['½', '0.5'] else 0.0
+                            opponent_rating = seeding_to_initial_rating.get(opp_seeding_num_from_header)
+                            games_played_details.append({"opponent_seeding_num": opp_seeding_num_from_header, "opponent_rating": opponent_rating, "player_color": "unknown", "score": score, "is_bye": False, "result_str": game_text})
                         else:
-                            app_logger.warning(f"Не удалось распознать формат результата тура '{game_text}' для {player_name} (строка {row_idx+1}) в {tournament_url}")
-                            games_played_details.append({"opponent_seeding_num": None, "opponent_rating": None, "player_color": "unknown", "score": 0.0, "is_bye": False, "result_str": game_text})
+                            games_played_details.append({"opponent_seeding_num": None, "opponent_rating": None, "player_color": "unknown", "score": 0.0, "is_bye": True, "result_str": game_text})
+
+                    elif bye_or_forfeit_match:
+                        score = 1.0 if game_text.strip() == '+' else 0.0
+                        is_bye = game_text.strip() == '+'
+                        games_played_details.append({"opponent_seeding_num": None, "opponent_rating": None, "player_color": "unknown", "score": score, "is_bye": is_bye, "result_str": game_text})
+
+                    elif game_text and game_text.strip().lower() not in ['x', 'х']:
+                        app_logger.warning(f"Не удалось распознать формат тура '{game_text}' для {player_name} в {tournament_url}")
 
                 parsed_player_results.append({"place": final_place, "name": player_name, "player_id": player_id_fsr, "seeding_number": current_seeding_num, "points": str(points), "initial_rating": initial_rating, "avg_opponent_rating_fsr": avg_opponent_rating_val, "new_rating": new_rating_val if new_rating_val > 0 else ('—' if initial_rating == 0 and rating_change_val == 0 else initial_rating + rating_change_val), "rating_change": rating_change_val, "norm": norm_val, "games_played": games_played_details})
-            except IndexError:
-                app_logger.error(f"IndexError при парсинге колонок для игрока {player_name if 'player_name' in locals() else 'N/A'} (строка {row_idx+1}). Ожидалось больше колонок. Всего: {len(cols)}. Нужен индекс до: {max_used_idx_for_row if 'max_used_idx_for_row' in locals() else 'не определен'}", exc_info=True)
             except Exception as e:
                 app_logger.error(f"Общая ошибка парсинга данных игрока ({player_name if 'player_name' in locals() else 'N/A'}, строка {row_idx+1}): {e}", exc_info=True)
         

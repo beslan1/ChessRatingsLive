@@ -207,8 +207,24 @@ body.tournament-view-active .footer-container {
 #top-achievers-container ol { list-style: none; padding-left: 0; counter-reset: top-achievers-counter; }
 #top-achievers-container li { display: flex; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid #edf2f7; counter-increment: top-achievers-counter; font-size: 0.9rem; }
 #top-achievers-container li:last-child { border-bottom: none; }
-#top-achievers-container li::before { content: counter(top-achievers-counter); font-weight: 700; font-size: 1.1rem; min-width: 2rem; text-align: right; margin-right: 1rem; color: #718096; }
-.achiever-medals { margin-left: auto; display: flex; gap: 0.75rem; font-size: 0.9rem; }
+#top-achievers-container li::before {
+    content: counter(top-achievers-counter);
+    font-weight: 700;
+    font-size: 1.1rem;
+    min-width: 1.5rem;      
+    text-align: left;       
+    margin-right: 0.75rem; 
+    color: #718096;
+}
+/* Новое правило для .achiever-medals */
+.achiever-medals {
+    margin-left: auto;
+    display: grid; 
+    grid-template-columns: 30px 1fr 1fr 1fr; 
+    gap: 0.5rem; /* Отступ между колонками */
+    width: 180px; /* Задаем блоку фиксированную ширину для стабильности */
+    align-items: center;
+}
 .medal-count { display: inline-block; min-width: 50px; text-align: left; }
 
 
