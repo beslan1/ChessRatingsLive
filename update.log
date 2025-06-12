@@ -34725,3 +34725,26 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='ratings.ruchess.r
 2025-06-11 17:55:15,414 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 164806
 2025-06-11 17:55:17,744 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
 2025-06-11 17:55:17,744 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 79443
+2025-06-11 20:57:49,411 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-11 20:57:49,414 - INFO - Начало полного пересчета рейтинга достижений...
+2025-06-11 20:57:49,415 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-11 20:57:49,416 - ERROR - Ошибка чтения игроков из БД: no such table: players
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 759, in load_players
+    sql_insert = f"INSERT INTO players ({', '.join(cols_for_insert)}) VALUES ({placeholders})"
+sqlite3.OperationalError: no such table: players
+2025-06-11 20:57:49,417 - ERROR - Ошибка чтения игроков из БД: no such table: players
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 759, in load_players
+    sql_insert = f"INSERT INTO players ({', '.join(cols_for_insert)}) VALUES ({placeholders})"
+sqlite3.OperationalError: no such table: players
+2025-06-11 20:57:49,442 - INFO - Функция load_players (из БД) вернула 0 игроков с новыми полями изменений
+2025-06-11 20:57:49,442 - INFO - Функция load_players (из БД) вернула 0 игроков с новыми полями изменений
+2025-06-11 20:57:49,443 - INFO - Рейтинг достижений успешно рассчитан и сохранен в C:\Users\user\Desktop\ChessRatingsLive\achievers_ranking.json. Всего игроков: 0
+2025-06-11 23:53:54,391 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-11 23:53:54,397 - ERROR - Ошибка чтения игроков из БД: no such table: players
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 759, in load_players
+    sql_insert = f"INSERT INTO players ({', '.join(cols_for_insert)}) VALUES ({placeholders})"
+sqlite3.OperationalError: no such table: players
+2025-06-11 23:53:54,398 - INFO - Функция load_players (из БД) вернула 0 игроков с новыми полями изменений
