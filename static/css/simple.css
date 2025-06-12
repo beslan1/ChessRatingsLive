@@ -110,7 +110,7 @@ body.theme-simple .table-container {
     box-shadow: 0 2px 4px rgba(0,0,0, 0.05);
 }
 body.theme-simple .table-container thead th {
-    background-color: #0a547f;
+    background-color: #343a40;
     color: #ffffff;
     border-bottom: 2px solid #ffffff;
 }

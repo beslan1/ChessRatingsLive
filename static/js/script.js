@@ -179,25 +179,29 @@ function renderTopAchievers(players) {
 
     const tooltipText = "Очки начисляются за призовые места. \nКрупные турниры (Чемпионат, Первенство, Кубок КБР)\nприносят больше очков, чем остальные.";
     
-    // ✅ ИЗМЕНЕНИЕ 1: Центрируем заголовок и абсолютно позиционируем кнопку "Все"
     let html = `
         <div style="position: relative; text-align: center; margin-bottom: 0.5rem;">
             <h3 style="margin: 0; font-size: 1.25rem; font-weight: 600; display: inline-block;">
-             Топ-10
+                Топ-10
                 <span title="${tooltipText}" style="cursor: help; font-weight: normal;">ℹ️</span>
             </h3>
-            <button id="show-all-achievers-btn" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 0.875rem; font-weight: 500; color: #3b82f6; background: none; border: none; padding: 0; cursor: pointer;">Общий зачет</button>
+            <button id="show-all-achievers-btn" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 0.875rem; font-weight: 500; color: #3b82f6; background: none; border: none; padding: 0; cursor: pointer;">Все</button>
         </div>
         <ol>`;
     
     players.forEach(player => {
-        // ✅ ИЗМЕНЕНИЕ 2: Обрезаем имя до Фамилии и Имени
+        let abbreviatedName = player.name;
         const nameParts = player.name.split(' ');
-        const shortName = nameParts.length > 1 ? `${nameParts[0]} ${nameParts[1]}` : player.name;
+        
+        if (nameParts.length > 1) {
+            const lastName = nameParts[0];
+            const firstNameInitial = nameParts[1].charAt(0);
+            abbreviatedName = `${lastName} ${firstNameInitial}.`;
+        }
 
         html += `
             <li>
-                <span class="achiever-name">${shortName}</span>
+                <span class="achiever-name">${abbreviatedName}</span>
                 <div class="achiever-medals">
                     <span class="font-bold">${player.points}</span> 
                     <span class="medal-count">🥇 ${player.gold}</span>

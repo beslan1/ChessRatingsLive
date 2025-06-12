@@ -62,7 +62,7 @@ body.theme-roman #champions-card #champions-title { color: var(--text-on-ash); }
 body.theme-roman #champions-card .champion-block, 
 body.theme-roman #champions-card .champion-block-wide { background-color: var(--medium-dark-element-bg-roman); border: 1px solid var(--ash-accent-darker); }
 body.theme-roman #champions-card .champion-name-container h3 { color: var(--text-on-black-roman); }
-body.theme-roman #champions-card .champion-name-container .winner-name { color: var(--light-ash-color); }
+body.theme-roman #champions-card .champion-name-container .winner-name { color: #e4e1e1; }
 
 body.theme-roman .footer-container a span { color: #a6a6a6; }
 body.theme-roman .footer-container a[href*="kbr-chess.ru"] span { color: var(--ash-accent-color); }
@@ -261,4 +261,7 @@ body.theme-roman .champions-list .champion-icon {
 .compare-button-styled:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.7);
+}
+body.theme-roman #champions-card .champion-name {
+    color: #e4e1e1; /* Ваш светлый цвет */
 }

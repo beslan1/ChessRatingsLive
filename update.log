@@ -3493,3 +3493,209 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='ratings.ruchess.r
 2025-06-12 12:19:33,278 - INFO - Детальные результаты и статистика для турнира ID 72518 спарсены, рассчитаны и сохранены.
 2025-06-12 12:20:02,700 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
 2025-06-12 12:20:02,700 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 65247
+2025-06-12 14:34:50,405 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 14:34:50,581 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 14:34:50,683 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 14:35:24,678 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 14:35:24,678 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 194412
+2025-06-12 14:52:02,121 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 14:52:02,283 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 14:52:02,368 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 14:52:26,767 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 14:52:26,909 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 14:52:26,999 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 14:52:37,191 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 14:52:37,212 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 14:52:37,359 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 14:56:18,116 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 14:56:18,268 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 14:56:18,364 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 14:58:16,990 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 14:58:17,134 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 14:58:17,233 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 15:04:01,042 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 15:04:01,058 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 15:04:01,210 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 15:13:39,906 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 15:13:40,053 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 15:13:40,147 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 15:14:20,381 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 15:14:20,396 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 15:14:20,526 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 15:16:56,702 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 15:16:56,865 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 15:16:56,958 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 15:23:10,608 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 15:23:10,753 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 15:23:10,843 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 15:25:18,330 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 15:25:18,478 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 15:25:18,573 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 15:32:03,753 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 15:32:03,753 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 208782
+2025-06-12 17:33:28,025 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 17:33:28,197 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 17:33:28,299 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 17:33:32,108 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 17:33:32,108 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 191218
+2025-06-12 17:33:34,797 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 17:33:34,797 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 150104
+2025-06-12 17:33:59,474 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 17:33:59,475 - INFO - Детальные результаты/статистика для турнира ID 127389 ('Финал Кубка КБР 2022 года по рапиду') отсутствуют или не полны. Запускаем парсер и расчет...
+2025-06-12 17:33:59,475 - INFO - Начало парсинга ВСЕХ ДАННЫХ турнира по URL: https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,969 - INFO - Определены индексы колонок для https://ratings.ruchess.ru/tournaments/127389: {'start_num': 0, 'federation': 1, 'name': 2, 'initial_rating': 3, 'points': 16, 'place': 17, 'avg_opponent_rating': 18, 'new_rating_combined': 19, 'norm': 20}, туры: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+2025-06-12 17:33:59,972 - INFO - Найдено 12 строк с результатами в таблице турнира https://ratings.ruchess.ru/tournaments/127389.
+2025-06-12 17:33:59,973 - WARNING - Не удалось распознать формат тура '♞' для Шахмурзова Фатима в https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,973 - WARNING - Не удалось распознать формат тура '♞' для Казиев Анзор в https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,973 - WARNING - Не удалось распознать формат тура '♞' для Танов Артур в https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,974 - WARNING - Не удалось распознать формат тура '♞' для Дедюхин Олег в https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,974 - WARNING - Не удалось распознать формат тура '♞' для Теунов Артур в https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,974 - WARNING - Не удалось распознать формат тура '♞' для Дикинов Алим в https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,974 - WARNING - Не удалось распознать формат тура '♞' для Текуев Эмир в https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,974 - WARNING - Не удалось распознать формат тура '♞' для Темирканов Давид в https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,975 - WARNING - Не удалось распознать формат тура '♞' для Козак Александр в https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,975 - WARNING - Не удалось распознать формат тура '♞' для Елканов Давид в https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,975 - WARNING - Не удалось распознать формат тура '♞' для Гедгафов Чамал в https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,975 - WARNING - Не удалось распознать формат тура '♞' для Вулах Валерий в https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:33:59,975 - INFO - Успешно спарсено 12 детальных результатов для турнира https://ratings.ruchess.ru/tournaments/127389
+2025-06-12 17:34:00,013 - INFO - DEBUG_HIGHLIGHTS: Финальный объект highlights для турнира ID 127389: {'max_rating_gain_player': {'name': 'Дикинов Алим', 'change': 52, 'initial_rating': 1868}, 'highest_performance_player': {'name': 'Темирканов Давид', 'performance': 2102, 'initial_rating': 2044}, 'best_white_player': None, 'best_black_player': None, 'avg_tournament_rating': 1857, 'avg_participant_age': 46, 'draw_percentage': 9.4, 'youngest_player': {'name': 'Текуев Эмир', 'age': 16, 'initial_rating': 1708}, 'oldest_player': {'name': 'Вулах Валерий', 'age': 71, 'initial_rating': 1561}, 'top_3_finishers': [{'name': 'Темирканов Давид', 'place': '1', 'points': '9.0', 'initial_rating': 2044}, {'name': 'Козак Александр', 'place': '2', 'points': '9.0', 'initial_rating': 2295}, {'name': 'Дедюхин Олег', 'place': '3', 'points': '8.0', 'initial_rating': 1914}], 'biggest_upset': {'upset_player_name': 'Дикинов Алим', 'upset_player_rating': 1868, 'defeated_opponent_seeding_num': 9, 'defeated_opponent_rating': 2295, 'rating_difference': 427, 'upset_player_gender': 'male'}}
+2025-06-12 17:34:00,546 - INFO - Данные турниров (263 записей) успешно сохранены в C:\Users\user\Desktop\ChessRatingsLive\tournaments.json
+2025-06-12 17:34:00,547 - INFO - Детальные результаты и статистика для турнира ID 127389 спарсены, рассчитаны и сохранены.
+2025-06-12 17:34:02,405 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 17:34:02,405 - INFO - Детальные результаты/статистика для турнира ID 89148 ('2-й этап Кубка КБР по рапиду') отсутствуют или не полны. Запускаем парсер и расчет...
+2025-06-12 17:34:02,405 - INFO - Начало парсинга ВСЕХ ДАННЫХ турнира по URL: https://ratings.ruchess.ru/tournaments/89148
+2025-06-12 17:34:03,369 - INFO - Определены индексы колонок для https://ratings.ruchess.ru/tournaments/89148: {'start_num': 0, 'federation': 1, 'name': 2, 'initial_rating': 3, 'points': 13, 'place': 14, 'avg_opponent_rating': 15, 'new_rating_combined': 16, 'norm': 17}, туры: [4, 5, 6, 7, 8, 9, 10, 11, 12]
+2025-06-12 17:34:03,375 - INFO - Найдено 41 строк с результатами в таблице турнира https://ratings.ruchess.ru/tournaments/89148.
+2025-06-12 17:34:03,381 - INFO - Успешно спарсено 41 детальных результатов для турнира https://ratings.ruchess.ru/tournaments/89148
+2025-06-12 17:34:03,387 - INFO - DEBUG_HIGHLIGHTS: Финальный объект highlights для турнира ID 89148: {'max_rating_gain_player': {'name': 'Бичоев Хажмуса', 'change': 158, 'initial_rating': 1000}, 'highest_performance_player': {'name': 'Шахмурзова Фатима', 'performance': 1961, 'initial_rating': 1836}, 'best_white_player': {'name': 'Теунов Артур', 'score': 4.0, 'games': 4, 'percentage': 100.0}, 'best_black_player': {'name': 'Шахмурзова Фатима', 'score': 3.5, 'games': 4, 'percentage': 87.5}, 'avg_tournament_rating': 1344, 'avg_participant_age': 36, 'draw_percentage': 7.8, 'youngest_player': {'name': 'Гетигежева Виктория', 'age': 13, 'initial_rating': 1026}, 'oldest_player': {'name': 'Кафаджи Леонид', 'age': 84, 'initial_rating': 1158}, 'top_3_finishers': [{'name': 'Шахмурзова Фатима', 'place': '1', 'points': '8.0', 'initial_rating': 1836}, {'name': 'Козак Александр', 'place': '2', 'points': '7.5', 'initial_rating': 2207}, {'name': 'Теунов Артур', 'place': '3', 'points': '6.5', 'initial_rating': 1961}], 'biggest_upset': {'upset_player_name': 'Казиев Анзор', 'upset_player_rating': 1484, 'defeated_opponent_seeding_num': 3, 'defeated_opponent_rating': 1961, 'rating_difference': 477, 'upset_player_gender': 'male'}}
+2025-06-12 17:34:03,871 - INFO - Данные турниров (263 записей) успешно сохранены в C:\Users\user\Desktop\ChessRatingsLive\tournaments.json
+2025-06-12 17:34:03,871 - INFO - Детальные результаты и статистика для турнира ID 89148 спарсены, рассчитаны и сохранены.
+2025-06-12 17:35:02,459 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 17:35:02,472 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 17:35:02,611 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 19:18:27,178 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 19:18:27,358 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 19:18:27,457 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 19:35:15,830 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 19:35:15,849 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 19:35:15,991 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 19:38:13,336 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 19:38:13,496 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 19:38:13,594 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 19:40:34,435 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 19:40:34,479 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 19:40:34,625 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 19:48:56,574 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 19:48:56,726 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 19:48:56,834 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 19:49:12,977 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 19:49:13,146 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 19:49:13,243 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 20:08:34,855 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 20:08:34,874 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 20:08:35,058 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 20:09:28,008 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 20:09:28,179 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 20:09:28,277 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 20:09:41,736 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 20:09:41,898 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 20:09:41,991 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 20:10:11,981 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 20:10:12,141 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 20:10:12,237 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 20:10:27,506 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 20:10:27,665 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 20:10:27,762 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 22:42:54,530 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 22:42:54,698 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 22:42:54,793 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 22:43:24,016 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 22:43:24,191 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 22:43:24,287 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 22:43:27,859 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 22:43:27,859 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 186584
+2025-06-12 22:43:55,261 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 22:43:55,274 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 22:43:55,407 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 22:51:21,877 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 22:51:21,896 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 22:51:22,054 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 22:51:54,087 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 22:51:54,241 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 22:51:54,335 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 22:53:09,228 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 22:53:09,241 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 22:53:09,376 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 22:58:23,291 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 22:58:23,449 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 22:58:23,542 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 22:58:55,166 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 22:58:55,323 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 22:58:55,416 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 23:02:07,468 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 23:02:07,617 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 23:02:07,722 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 23:02:41,529 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 23:02:41,543 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 23:02:41,682 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 23:03:11,875 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 23:03:11,889 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 23:03:12,019 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 23:04:17,609 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 23:04:17,624 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 23:04:17,758 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 23:15:41,621 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 23:15:41,777 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 23:15:41,868 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 23:18:36,422 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 23:18:36,588 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-12 23:18:36,692 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 23:25:07,253 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-12 23:25:07,328 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-12 23:25:07,422 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 00:19:16,101 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 00:19:16,326 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 00:19:16,426 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 00:22:26,950 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 00:22:27,107 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 00:22:27,202 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 00:29:45,737 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 00:29:45,782 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 00:29:45,908 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 00:34:36,999 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 00:34:37,158 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 00:34:37,254 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 00:42:58,747 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 00:42:58,901 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 00:42:58,996 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 00:46:20,829 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 00:46:20,972 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 00:46:21,076 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 00:46:52,497 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 00:46:52,647 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 00:46:52,740 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 00:52:18,425 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 00:52:18,608 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 00:52:18,710 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 01:10:30,673 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 01:10:30,817 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 01:10:30,913 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 01:12:57,935 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 01:12:58,093 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 01:12:58,187 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 01:13:27,171 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 01:13:27,184 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 01:13:27,324 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 01:16:30,144 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 01:16:30,294 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 01:16:30,385 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 01:17:58,541 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 01:17:58,687 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 01:17:58,776 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 01:21:25,984 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 01:21:26,135 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 01:21:26,229 - INFO - Функция load_players (из БД) вернула 1032 игроков с новыми полями изменений
+2025-06-13 01:21:41,598 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 01:21:41,598 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 207777
+2025-06-13 01:21:44,283 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 01:21:44,283 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 178891
