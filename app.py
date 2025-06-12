@@ -1,8 +1,8 @@
 from flask import Flask, render_template, jsonify, request
 import json
 import os
-import sqlite3 
-import psycopg2
+import sqlite3
+import pyodbc
 import requests
 from bs4 import BeautifulSoup, NavigableString
 import re
@@ -65,21 +65,28 @@ DP_VALUES = {
 # Замените вашу старую функцию get_db_connection на эту
 # Замените вашу старую функцию get_db_connection на эту
 def get_db_connection():
-    # Render предоставит нам DATABASE_URL в переменных окружения на сервере
-    db_url = os.environ.get('DATABASE_URL')
+    db_server = os.environ.get('MSSQL_SERVER')
+    db_user = os.environ.get('MSSQL_USER')
+    db_password = os.environ.get('MSSQL_PASSWORD')
+    db_name = os.environ.get('MSSQL_DATABASE')
 
-    if db_url:
-        # Если мы на сервере (есть DATABASE_URL), подключаемся к PostgreSQL
+    if all([db_server, db_user, db_password, db_name]):
         try:
-            conn = psycopg2.connect(db_url)
-            # Для PostgreSQL нам не нужна row_factory, так как psycopg2 может возвращать словари по-другому,
-            # но для простоты оставим как есть, ваш код будет работать.
+            # Создаем строку подключения для ODBC драйвера
+            conn_str = (
+                f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+                f"SERVER={db_server};"
+                f"DATABASE={db_name};"
+                f"UID={db_user};"
+                f"PWD={db_password};"
+            )
+            conn = pyodbc.connect(conn_str)
             return conn
         except Exception as e:
-            app_logger.error(f"Не удалось подключиться к PostgreSQL: {e}")
+            app_logger.error(f"Не удалось подключиться к MS SQL Server через pyodbc: {e}")
             return None
     else:
-        # Если мы запускаем локально (DATABASE_URL нет), используем старый метод с SQLite
+        # Локальный fallback на SQLite остается без изменений
         conn = sqlite3.connect(DATABASE_FILE)
         conn.row_factory = sqlite3.Row
         return conn

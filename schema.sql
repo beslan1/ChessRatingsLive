@@ -1,29 +1,30 @@
--- Файл: schema.sql
+-- Файл: schema.sql (версия для MS SQL Server)
 
-DROP TABLE IF EXISTS players;
+IF OBJECT_ID('dbo.players', 'U') IS NOT NULL
+DROP TABLE dbo.players;
 
 CREATE TABLE players (
-    id SERIAL PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     fsr_id BIGINT UNIQUE NOT NULL,
     fide_id BIGINT,
-    full_name TEXT NOT NULL,
-    birth_year INTEGER,
+    full_name NVARCHAR(255) NOT NULL,
+    birth_year INT,
     gender VARCHAR(10),
-    local_title VARCHAR(50),
-    fsr_official_title VARCHAR(50),
-    is_classic_champion BOOLEAN DEFAULT FALSE,
-    is_rapid_champion BOOLEAN DEFAULT FALSE,
-    is_blitz_champion BOOLEAN DEFAULT FALSE,
-    is_child BOOLEAN DEFAULT FALSE,
-    current_fsr_classic_rating INTEGER DEFAULT 0,
-    previous_fsr_classic_rating INTEGER DEFAULT 0,
-    current_fsr_rapid_rating INTEGER DEFAULT 0,
-    previous_fsr_rapid_rating INTEGER DEFAULT 0,
-    current_fsr_blitz_rating INTEGER DEFAULT 0,
-    previous_fsr_blitz_rating INTEGER DEFAULT 0,
-    current_fide_classic_rating INTEGER DEFAULT 0,
-    current_fide_rapid_rating INTEGER DEFAULT 0,
-    current_fide_blitz_rating INTEGER DEFAULT 0,
-    fsr_tournaments_played_count INTEGER DEFAULT 0,
-    last_profile_update_at TIMESTAMP
+    local_title NVARCHAR(50),
+    fsr_official_title NVARCHAR(50),
+    is_classic_champion BIT DEFAULT 0,
+    is_rapid_champion BIT DEFAULT 0,
+    is_blitz_champion BIT DEFAULT 0,
+    is_child BIT DEFAULT 0,
+    current_fsr_classic_rating INT DEFAULT 0,
+    previous_fsr_classic_rating INT DEFAULT 0,
+    current_fsr_rapid_rating INT DEFAULT 0,
+    previous_fsr_rapid_rating INT DEFAULT 0,
+    current_fsr_blitz_rating INT DEFAULT 0,
+    previous_fsr_blitz_rating INT DEFAULT 0,
+    current_fide_classic_rating INT DEFAULT 0,
+    current_fide_rapid_rating INT DEFAULT 0,
+    current_fide_blitz_rating INT DEFAULT 0,
+    fsr_tournaments_played_count INT DEFAULT 0,
+    last_profile_update_at DATETIME2
 );

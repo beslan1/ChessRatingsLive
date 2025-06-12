@@ -1,33 +1,41 @@
-# Файл: init_db.py
+# Файл: init_db.py (версия для pyodbc)
 import os
-import psycopg2
-from dotenv import load_dotenv # Установим эту библиотеку для удобства
+import pyodbc
+from dotenv import load_dotenv
 
-# Загружаем переменные из файла .env для локального теста
 load_dotenv()
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
+db_server = os.environ.get('MSSQL_SERVER')
+db_user = os.environ.get('MSSQL_USER')
+db_password = os.environ.get('MSSQL_PASSWORD')
+db_name = os.environ.get('MSSQL_DATABASE')
 
-if not DATABASE_URL:
-    print("Ошибка: Переменная окружения DATABASE_URL не найдена.")
-    print("Для локального теста создайте файл .env и добавьте в него DATABASE_URL='...'")
+if not all([db_server, db_user, db_password, db_name]):
+    print("Ошибка: Не найдены все необходимые переменные окружения для MS SQL.")
 else:
     try:
-        print("Подключаемся к базе данных...")
-        conn = psycopg2.connect(DATABASE_URL)
-        cur = conn.cursor()
+        print(f"Подключаемся к MS SQL серверу: {db_server} через pyodbc...")
+        conn_str = (
+            f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+            f"SERVER={db_server};"
+            f"DATABASE={db_name};"
+            f"UID={db_user};"
+            f"PWD={db_password};"
+        )
+        conn = pyodbc.connect(conn_str, autocommit=True)
+        cursor = conn.cursor()
 
         print("Читаем файл schema.sql...")
         with open('schema.sql', 'r', encoding='utf-8') as f:
+            # ODBC драйвер обычно хорошо работает с многокомандными скриптами
             sql_script = f.read()
 
         print("Выполняем SQL-скрипт для создания таблиц...")
-        cur.execute(sql_script)
+        cursor.execute(sql_script)
 
-        conn.commit()
         print("Таблицы успешно созданы!")
 
-        cur.close()
+        cursor.close()
         conn.close()
     except Exception as e:
         print(f"Произошла ошибка: {e}")
