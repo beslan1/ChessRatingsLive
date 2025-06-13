@@ -3699,3 +3699,61 @@ requests.exceptions.ConnectionError: HTTPSConnectionPool(host='ratings.ruchess.r
 2025-06-13 01:21:41,598 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 207777
 2025-06-13 01:21:44,283 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
 2025-06-13 01:21:44,283 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 178891
+2025-06-13 10:33:26,231 - INFO - Планировщик запущен.
+2025-06-13 10:33:26,231 - INFO - Flask приложение запускается на host 0.0.0.0, port 5000
+2025-06-13 10:33:36,242 - INFO - Полное обновление при старте не требуется. Последнее было: 2025-06-12 12:12:44.268416.
+2025-06-13 10:33:36,242 - INFO - Пропуск первоначального/устаревшего полного обновления данных (данные актуальны).
+2025-06-13 10:33:40,497 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 10:33:40,690 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 10:33:40,775 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456)')
+2025-06-13 10:33:40,775 - ERROR - Ошибка в /api/players: 'NoneType' object has no attribute 'cursor'
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 850, in get_players_api
+    players_data = load_players()
+                   ^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 784, in load_players
+    cursor = conn.cursor()
+             ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2025-06-13 10:33:54,943 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 10:33:54,943 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 194641
+2025-06-13 10:33:57,495 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 10:33:57,495 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 191271
+2025-06-13 10:34:14,479 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 10:34:14,627 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 10:34:14,710 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456)')
+2025-06-13 10:34:14,710 - ERROR - Ошибка в /api/players: 'NoneType' object has no attribute 'cursor'
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 850, in get_players_api
+    players_data = load_players()
+                   ^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 784, in load_players
+    cursor = conn.cursor()
+             ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2025-06-13 10:36:31,419 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 10:36:31,576 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 10:36:48,730 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 10:36:48,730 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 207762
+2025-06-13 10:36:53,137 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 10:36:53,297 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 10:37:07,567 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Поставщик именованных каналов: Не удалось открыть соединение с SQL Server [64].  (64) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Время ожидания входа в систему истекло. (0); [08001] [Microsoft][ODBC Driver 17 for SQL Server]При установлении соединения с сервером SQL Server произошла ошибка, связанная с сетью или с определенным экземпляром. Сервер не найден или недоступен. Убедитесь, что имя экземпляра указано правильно и на сервере SQL Server разрешены удаленные соединения. Дополнительные сведения см. в электронной документации по SQL Server. (64)')
+2025-06-13 10:37:07,567 - ERROR - Ошибка в /api/players: 'NoneType' object has no attribute 'cursor'
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 850, in get_players_api
+    players_data = load_players()
+                   ^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 784, in load_players
+    cursor = conn.cursor()
+             ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2025-06-13 10:37:08,253 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Поставщик именованных каналов: Не удалось открыть соединение с SQL Server [53].  (53) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Время ожидания входа в систему истекло. (0); [08001] [Microsoft][ODBC Driver 17 for SQL Server]При установлении соединения с сервером SQL Server произошла ошибка, связанная с сетью или с определенным экземпляром. Сервер не найден или недоступен. Убедитесь, что имя экземпляра указано правильно и на сервере SQL Server разрешены удаленные соединения. Дополнительные сведения см. в электронной документации по SQL Server. (53)')
+2025-06-13 10:37:08,253 - ERROR - Ошибка в /api/players: 'NoneType' object has no attribute 'cursor'
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 850, in get_players_api
+    players_data = load_players()
+                   ^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 784, in load_players
+    cursor = conn.cursor()
+             ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'cursor'
