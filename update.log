@@ -3757,3 +3757,142 @@ Traceback (most recent call last):
     cursor = conn.cursor()
              ^^^^^^^^^^^
 AttributeError: 'NoneType' object has no attribute 'cursor'
+2025-06-13 23:09:14,959 - INFO - Планировщик запущен.
+2025-06-13 23:09:14,959 - INFO - Flask приложение запускается на host 0.0.0.0, port 5000
+2025-06-13 23:09:23,180 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 23:09:23,389 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 23:09:23,476 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456)')
+2025-06-13 23:09:23,476 - ERROR - Ошибка в /api/players: 'NoneType' object has no attribute 'cursor'
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 850, in get_players_api
+    players_data = load_players()
+                   ^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 784, in load_players
+    cursor = conn.cursor()
+             ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2025-06-13 23:09:24,968 - INFO - Прошло более 23 часов с последнего полного обновления (2025-06-12 12:12:44.268416). Требуется обновление.
+2025-06-13 23:09:24,968 - INFO - Запускаем первоначальный/устаревший полный набор фоновых задач...
+2025-06-13 23:09:24,968 - INFO - Начало полного обновления списка турниров КБР: 2025-06-13 23:09:24
+2025-06-13 23:09:24,968 - INFO - Начало парсинга ВСЕХ турниров для региона 7.
+2025-06-13 23:09:24,968 - INFO - Парсинг страницы 1...
+2025-06-13 23:09:25,319 - INFO - Найдено 30 строк на странице 1.
+2025-06-13 23:09:26,330 - INFO - Парсинг страницы 2...
+2025-06-13 23:09:26,630 - INFO - Найдено 30 строк на странице 2.
+2025-06-13 23:09:27,641 - INFO - Парсинг страницы 3...
+2025-06-13 23:09:27,938 - INFO - Найдено 30 строк на странице 3.
+2025-06-13 23:09:28,948 - INFO - Парсинг страницы 4...
+2025-06-13 23:09:29,229 - INFO - Найдено 30 строк на странице 4.
+2025-06-13 23:09:30,239 - INFO - Парсинг страницы 5...
+2025-06-13 23:09:30,586 - INFO - Найдено 30 строк на странице 5.
+2025-06-13 23:09:31,596 - INFO - Парсинг страницы 6...
+2025-06-13 23:09:31,871 - INFO - Найдено 30 строк на странице 6.
+2025-06-13 23:09:32,882 - INFO - Парсинг страницы 7...
+2025-06-13 23:09:33,161 - INFO - Найдено 30 строк на странице 7.
+2025-06-13 23:09:34,172 - INFO - Парсинг страницы 8...
+2025-06-13 23:09:34,436 - INFO - Найдено 30 строк на странице 8.
+2025-06-13 23:09:35,446 - INFO - Парсинг страницы 9...
+2025-06-13 23:09:35,715 - INFO - Найдено 24 строк на странице 9.
+2025-06-13 23:09:35,725 - INFO - Обнаружена последняя страница пагинации. Завершаем после этой страницы.
+2025-06-13 23:09:35,725 - INFO - Сбор всех турниров завершен. Всего собрано: 264
+2025-06-13 23:09:35,872 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 263 турниров
+2025-06-13 23:09:36,400 - INFO - Данные турниров (264 записей) успешно сохранены в C:\Users\user\Desktop\ChessRatingsLive\tournaments.json
+2025-06-13 23:09:36,400 - INFO - Добавлено 1 новых турниров. Всего теперь: 264
+2025-06-13 23:09:41,406 - INFO - ЗАПУСК ОБНОВЛЕНИЯ ДАННЫХ ИГРОКОВ КБР (БД): 2025-06-13 23:09:41
+2025-06-13 23:09:41,455 - INFO - load_initial_players: Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\players_kbr.json: 1032 игроков
+2025-06-13 23:09:41,624 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456)')
+2025-06-13 23:09:41,624 - ERROR - Ошибка при первоначальном запуске update_ratings: 'NoneType' object has no attribute 'cursor'
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 1195, in initial_run
+    update_ratings()
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 711, in update_ratings
+    cursor = conn.cursor()
+             ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2025-06-13 23:09:41,626 - WARNING - Первоначальный/устаревший полный набор фоновых задач завершен С ОШИБКАМИ. Метка времени не обновлена.
+2025-06-13 23:09:51,323 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-13 23:09:51,324 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 186389
+2025-06-13 23:11:24,271 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 23:11:24,427 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-13 23:11:24,508 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456)')
+2025-06-13 23:11:24,508 - ERROR - Ошибка в /api/players: 'NoneType' object has no attribute 'cursor'
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 850, in get_players_api
+    players_data = load_players()
+                   ^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 784, in load_players
+    cursor = conn.cursor()
+             ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2025-06-13 23:11:27,565 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-13 23:11:27,565 - INFO - Детальные результаты/статистика для турнира ID 211001 ('День России') отсутствуют или не полны. Запускаем парсер и расчет...
+2025-06-13 23:11:27,565 - INFO - Начало парсинга ВСЕХ ДАННЫХ турнира по URL: https://ratings.ruchess.ru/tournaments/211001
+2025-06-13 23:11:28,342 - INFO - Определены индексы колонок для https://ratings.ruchess.ru/tournaments/211001: {'start_num': 0, 'federation': 1, 'name': 2, 'initial_rating': 3, 'points': 14, 'place': 15, 'avg_opponent_rating': 16, 'norm': 17}, туры: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+2025-06-13 23:11:28,348 - INFO - Найдено 43 строк с результатами в таблице турнира https://ratings.ruchess.ru/tournaments/211001.
+2025-06-13 23:11:28,352 - INFO - Успешно спарсено 43 детальных результатов для турнира https://ratings.ruchess.ru/tournaments/211001
+2025-06-13 23:11:28,522 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456)')
+2025-06-13 23:11:42,451 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-13 23:11:42,606 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-13 23:11:42,691 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456)')
+2025-06-13 23:11:42,691 - ERROR - Ошибка в /api/players: 'NoneType' object has no attribute 'cursor'
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 850, in get_players_api
+    players_data = load_players()
+                   ^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 784, in load_players
+    cursor = conn.cursor()
+             ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2025-06-13 23:11:45,988 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-13 23:11:45,988 - INFO - Детальные результаты/статистика для турнира ID 211001 ('День России') отсутствуют или не полны. Запускаем парсер и расчет...
+2025-06-13 23:11:45,988 - INFO - Начало парсинга ВСЕХ ДАННЫХ турнира по URL: https://ratings.ruchess.ru/tournaments/211001
+2025-06-13 23:11:46,736 - INFO - Определены индексы колонок для https://ratings.ruchess.ru/tournaments/211001: {'start_num': 0, 'federation': 1, 'name': 2, 'initial_rating': 3, 'points': 14, 'place': 15, 'avg_opponent_rating': 16, 'norm': 17}, туры: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+2025-06-13 23:11:46,743 - INFO - Найдено 43 строк с результатами в таблице турнира https://ratings.ruchess.ru/tournaments/211001.
+2025-06-13 23:11:46,746 - INFO - Успешно спарсено 43 детальных результатов для турнира https://ratings.ruchess.ru/tournaments/211001
+2025-06-13 23:11:46,909 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456)')
+2025-06-13 23:11:49,410 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-13 23:11:49,410 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 210786
+2025-06-13 23:13:07,397 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-13 23:13:07,397 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 208782
+2025-06-13 23:57:58,530 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-13 23:57:58,531 - INFO - Детальные результаты/статистика для турнира ID 211001 ('День России') отсутствуют или не полны. Запускаем парсер и расчет...
+2025-06-13 23:57:58,531 - INFO - Начало парсинга ВСЕХ ДАННЫХ турнира по URL: https://ratings.ruchess.ru/tournaments/211001
+2025-06-13 23:58:02,166 - INFO - Определены индексы колонок для https://ratings.ruchess.ru/tournaments/211001: {'start_num': 0, 'federation': 1, 'name': 2, 'initial_rating': 3, 'points': 14, 'place': 15, 'avg_opponent_rating': 16, 'norm': 17}, туры: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+2025-06-13 23:58:02,173 - INFO - Найдено 43 строк с результатами в таблице турнира https://ratings.ruchess.ru/tournaments/211001.
+2025-06-13 23:58:02,177 - INFO - Успешно спарсено 43 детальных результатов для турнира https://ratings.ruchess.ru/tournaments/211001
+2025-06-13 23:58:05,612 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('28000', '[28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456) (SQLDriverConnect); [28000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]При входе в систему пользователя "beslan.mukozhev" произошла ошибка. (18456)')
+2025-06-14 01:18:00,228 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-14 01:18:00,399 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-14 01:18:03,960 - INFO - Загрузка игроков из базы данных SQLite...
+2025-06-14 01:18:04,114 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-14 01:18:06,969 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-14 01:18:06,969 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 210786
+2025-06-14 01:18:19,699 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-14 01:18:19,699 - INFO - Детальные результаты/статистика для турнира ID 211001 ('День России') отсутствуют или не полны. Запускаем парсер и расчет...
+2025-06-14 01:18:19,699 - INFO - Начало парсинга ВСЕХ ДАННЫХ турнира по URL: https://ratings.ruchess.ru/tournaments/211001
+2025-06-14 01:18:22,219 - INFO - Определены индексы колонок для https://ratings.ruchess.ru/tournaments/211001: {'start_num': 0, 'federation': 1, 'name': 2, 'initial_rating': 3, 'points': 14, 'place': 15, 'avg_opponent_rating': 16, 'new_rating_combined': 17, 'norm': 18}, туры: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+2025-06-14 01:18:22,226 - INFO - Найдено 43 строк с результатами в таблице турнира https://ratings.ruchess.ru/tournaments/211001.
+2025-06-14 01:18:22,236 - INFO - Успешно спарсено 43 детальных результатов для турнира https://ratings.ruchess.ru/tournaments/211001
+2025-06-14 01:18:24,211 - INFO - Успешно загружены данные из C:\Users\user\Desktop\ChessRatingsLive\tournaments.json: 264 турниров
+2025-06-14 01:18:24,211 - INFO - Найдены детальные результаты и хайлайты в кэше для турнира ID 196768
+2025-06-14 01:18:36,380 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Поставщик именованных каналов: Не удалось открыть соединение с SQL Server [53].  (53) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Время ожидания входа в систему истекло. (0); [08001] [Microsoft][ODBC Driver 17 for SQL Server]При установлении соединения с сервером SQL Server произошла ошибка, связанная с сетью или с определенным экземпляром. Сервер не найден или недоступен. Убедитесь, что имя экземпляра указано правильно и на сервере SQL Server разрешены удаленные соединения. Дополнительные сведения см. в электронной документации по SQL Server. (53)')
+2025-06-14 01:18:36,380 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Поставщик именованных каналов: Не удалось открыть соединение с SQL Server [64].  (64) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Время ожидания входа в систему истекло. (0); [08001] [Microsoft][ODBC Driver 17 for SQL Server]При установлении соединения с сервером SQL Server произошла ошибка, связанная с сетью или с определенным экземпляром. Сервер не найден или недоступен. Убедитесь, что имя экземпляра указано правильно и на сервере SQL Server разрешены удаленные соединения. Дополнительные сведения см. в электронной документации по SQL Server. (64)')
+2025-06-14 01:18:36,380 - ERROR - Ошибка в /api/players: 'NoneType' object has no attribute 'cursor'
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 850, in get_players_api
+    players_data = load_players()
+                   ^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 784, in load_players
+    cursor = conn.cursor()
+             ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2025-06-14 01:18:36,381 - ERROR - Ошибка в /api/players: 'NoneType' object has no attribute 'cursor'
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 850, in get_players_api
+    players_data = load_players()
+                   ^^^^^^^^^^^^^^
+  File "C:\Users\user\Desktop\ChessRatingsLive\app.py", line 784, in load_players
+    cursor = conn.cursor()
+             ^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'cursor'
+2025-06-14 01:18:37,351 - ERROR - Не удалось подключиться к MS SQL Server через pyodbc: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Поставщик именованных каналов: Не удалось открыть соединение с SQL Server [53].  (53) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Время ожидания входа в систему истекло. (0); [08001] [Microsoft][ODBC Driver 17 for SQL Server]При установлении соединения с сервером SQL Server произошла ошибка, связанная с сетью или с определенным экземпляром. Сервер не найден или недоступен. Убедитесь, что имя экземпляра указано правильно и на сервере SQL Server разрешены удаленные соединения. Дополнительные сведения см. в электронной документации по SQL Server. (53)')
