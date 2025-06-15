@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let tournaments = [];
     let currentPage = 1;
     let playersPerPage = 20; 
+    let allAchievers = [];
     
     let isTop100Filter = false;
     let isWomenFilter = false;
@@ -149,6 +150,15 @@ function forceTournamentViewLayout() {
             if (tbody) tbody.innerHTML = '<tr><td colspan="6" class="py-3 px-4 text-center text-red-500">Ошибка загрузки игроков</td></tr>';
         }
     }
+    async function loadAllAchievers() {
+    try {
+        const response = await fetch('/api/all-achievers');
+        if (!response.ok) throw new Error(`HTTP error!`);
+        allAchievers = await response.json();
+    } catch (error) {
+        console.error('loadAllAchievers: Ошибка загрузки всех достижений:', error);
+    }
+}
     
     async function loadTournamentsData() { 
         try {
@@ -217,70 +227,61 @@ function renderTopAchievers(players) {
 }
 // Эту новую функцию можно добавить после функции renderTopAchievers
 function displayAllAchievers() {
-    console.log("Загрузка полного рейтинга достижений...");
-    showLoader(); // Показываем "Загрузка..." в основной таблице
+        console.log("Отображение полного рейтинга достижений...");
+        showLoader();
 
-    fetch('/api/all-achievers')
-        .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
-        .then(achievers => {
-            const tableHeader = getElement('table-header');
-            const tbody = getElement('players-table');
-            if (!tableHeader || !tbody) return;
+        const tableHeader = getElement('table-header');
+        const tbody = getElement('players-table');
+        if (!tableHeader || !tbody) return;
 
-            // Скрываем ненужные элементы
-            document.body.classList.remove('tournament-view-active');
-            if (comparisonView) comparisonView.classList.add('hidden');
-            if (tableContainer) tableContainer.classList.remove('hidden');
-            updateRightColumnView('DEFAULT');
-            
-            // Меняем заголовок таблицы
-            tableHeader.innerHTML = `
-                <tr><th colspan="6" class="py-3 px-2 text-xl text-center font-bold">Общий зачет</th></tr>
-                <tr class="uppercase text-base leading-normal">
-                    <th class="py-3 px-2 text-center">#</th>
-                    <th class="py-3 px-2 text-left">Ф И О</th>
-                    <th class="py-3 px-2 text-center font-bold">Очки</th>
-                    <th class="py-3 px-2 text-center">🥇</th>
-                    <th class="py-3 px-2 text-center">🥈</th>
-                    <th class="py-3 px-2 text-center">🥉</th>
-                </tr>
-            `;
+        // Сброс видов
+        document.body.classList.remove('tournament-view-active');
+        if (comparisonView) comparisonView.classList.add('hidden');
+        if (tableContainer) tableContainer.classList.remove('hidden');
+        updateRightColumnView('DEFAULT');
+        
+        tableHeader.innerHTML = `
+            <tr><th colspan="7" class="py-3 px-2 text-xl text-center font-bold">Общий зачет по очкам достижений</th></tr>
+            <tr class="uppercase text-base leading-normal">
+                <th class="py-3 px-2 text-center">#</th>
+                <th class="py-3 px-2 text-left">Ф И О</th>
+                <th class="py-3 px-2 text-center font-bold">Зачетные очки</th>
+                <th class="py-3 px-2 text-center">Турнирные очки</th>
+                <th class="py-3 px-2 text-center">🥇</th>
+                <th class="py-3 px-2 text-center">🥈</th>
+                <th class="py-3 px-2 text-center">🥉</th>
+            </tr>
+        `;
 
-            tbody.innerHTML = ''; // Очищаем таблицу
-            if (!achievers || achievers.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4">Данные отсутствуют</td></tr>';
-                return;
-            }
-
-            // Заполняем таблицу данными
-            achievers.forEach((player, index) => {
-                const row = document.createElement('tr');
-                row.className = `${index % 2 === 0 ? 'even-row' : 'odd-row'}`;
-                row.innerHTML = `
-                    <td class="py-3 px-2 text-center">${index + 1}</td>
-                    <td class="py-3 px-2 text-left">${player.name}</td>
-                    <td class="py-3 px-2 text-center font-bold">${player.points}</td>
-                    <td class="py-3 px-2 text-center">${player.gold}</td>
-                    <td class="py-3 px-2 text-center">${player.silver}</td>
-                    <td class="py-3 px-2 text-center">${player.bronze}</td>
-                `;
-                tbody.appendChild(row);
-            });
-
-            // Прячем пагинацию и информацию о фильтре
+        tbody.innerHTML = '';
+        
+        // Вот проверка, которую вы искали.
+        // Она проверяет, удалось ли функции loadAllAchievers загрузить данные.
+        if (!allAchievers || allAchievers.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" class="text-center py-4 text-red-500">Данные о достижениях не загружены или отсутствуют.</td></tr>';
             getElement('pagination').innerHTML = '';
-            getElement('filter-info').textContent = `Всего: ${achievers.length}`;
+            getElement('filter-info').textContent = `Всего: 0`;
+            return;
+        }
 
-        })
-        .catch(error => {
-            console.error('Ошибка при загрузке полного рейтинга достижений:', error);
-            const tbody = getElement('players-table');
-            if(tbody) tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-red-500">Не удалось загрузить рейтинг</td></tr>';
+        allAchievers.forEach((player, index) => {
+            const row = document.createElement('tr');
+            row.className = `${index % 2 === 0 ? 'even-row' : 'odd-row'}`;
+            row.innerHTML = `
+                <td class="py-3 px-2 text-center">${index + 1}</td>
+                <td class="py-3 px-2 text-left">${player.name}</td>
+                <td class="py-3 px-2 text-center font-bold">${player.points}</td>
+                <td class="py-3 px-2 text-center">${player.raw_points}</td>
+                <td class="py-3 px-2 text-center">${player.gold}</td>
+                <td class="py-3 px-2 text-center">${player.silver}</td>
+                <td class="py-3 px-2 text-center">${player.bronze}</td>
+            `;
+            tbody.appendChild(row);
         });
-}
+
+        getElement('pagination').innerHTML = '';
+        getElement('filter-info').textContent = `Всего: ${allAchievers.length}`;
+    }
 
 function displayChampionHistory() {
     // Эта вспомогательная функция будет рисовать саму таблицу
@@ -582,7 +583,7 @@ const applyTheme = (themeName) => {
     };
 
     showLoader(); 
-    Promise.all([loadPlayers(), loadTournamentsData(), loadTopAchievers()]).then(() => {
+    Promise.all([loadPlayers(), loadTournamentsData(), loadTopAchievers(), loadAllAchievers()]).then(() => {
         if (!isTournamentTable && filteredPlayers.length === 0 && players.length > 0) {
             applyFilters();
         // ...
@@ -591,10 +592,7 @@ const applyTheme = (themeName) => {
         getElement('players-table').innerHTML = '<tr><td colspan="6" class="py-3 px-4 text-center">Игроки не найдены.</td></tr>';
         updatePagination(0,0);
     }
-// ...
-        const savedTheme = localStorage.getItem('selectedTheme') || 'theme-art';
-        applyTheme(savedTheme);
-    // ...
+
     }).catch(error => {
         console.error("Promise.all: Ошибка при начальной загрузке данных:", error);
         const tbody = getElement('players-table');
@@ -792,22 +790,28 @@ if (currentTournamentDetails?.name) {
     };
     
    // ЗАМЕНИТЕ НА ЭТУ ВЕРСИЮ
-const updatePlayerCard = (player) => { 
-    // Эта функция теперь не управляет видимостью, а ТОЛЬКО заполняет данными
+const updatePlayerCard = (player) => {
     const set = (id, text) => {
         const element = getElement(id);
         const isRatingField = id.startsWith('player-fshr-') || id.startsWith('player-fide-');
         if (element) element.textContent = (text === null || text === undefined || text === '' || ((text === 0 || text === "0") && isRatingField) ) ? '—' : text;
     };
 
+    const fieldsToClear = ['player-name', 'player-birth-year', 'player-gender', 'player-title', 'player-tournaments', 'player-fshr-id', 'player-fide-id', 'player-fshr-classic', 'player-fshr-rapid', 'player-fshr-blitz', 'player-fide-classic', 'player-fide-rapid', 'player-fide-blitz', 'player-raw-score'];
+
     if (!player) {
-        const fieldsToClear = ['player-name', 'player-birth-year', 'player-gender', 'player-title', 'player-tournaments', 'player-fshr-id', 'player-fide-id', 'player-fshr-classic', 'player-fshr-rapid', 'player-fshr-blitz', 'player-fide-classic', 'player-fide-rapid', 'player-fide-blitz'];
         fieldsToClear.forEach(id => { 
             const el = getElement(id); 
             if(el) el.textContent = id === 'player-name' ? 'Выберите игрока' : '—'; 
         });
         return;
     }
+
+    // --- НОВАЯ ЛОГИКА: Ищем данные игрока в allAchievers ---
+    const achieverData = allAchievers.find(a => a.id === player.id);
+    const rawScore = achieverData ? achieverData.raw_points : '—';
+    set('player-raw-score', rawScore.toString());
+    // --- КОНЕЦ НОВОЙ ЛОГИКИ ---
 
     const name = player.name || '—';
     let formattedName = name;
@@ -816,15 +820,25 @@ const updatePlayerCard = (player) => {
         formattedName = `${nameParts[0]} ${nameParts[1]}`;
         if (nameParts.length > 2) formattedName += `<br>${nameParts.slice(2).join(' ')}`;
     }
+    
     const birthYear = player.age && player.age !== '—' ? (new Date().getFullYear()) - parseInt(player.age) : '—';
     const gender = player.gender === 'female' ? 'Ж' : player.gender === 'male' ? 'М' : '—';
+    
     const playerNameEl = getElement('player-name');
     if (playerNameEl) playerNameEl.innerHTML = formattedName; 
-    set('player-birth-year', birthYear.toString()); set('player-gender', gender); set('player-title', player.title);
+    
+    set('player-birth-year', birthYear.toString()); 
+    set('player-gender', gender); 
+    set('player-title', player.title);
     set('player-tournaments', player.tournamentsPlayed != null ? player.tournamentsPlayed.toString() : '0');
-    set('player-fshr-id', player.id); set('player-fide-id', player.fide_id);
-    set('player-fshr-classic', player.rating); set('player-fshr-rapid', player.rapid_rating); set('player-fshr-blitz', player.blitz_rating);
-    set('player-fide-classic', player.fide_rating); set('player-fide-rapid', player.fide_rapid); set('player-fide-blitz', player.fide_blitz);
+    set('player-fshr-id', player.id); 
+    set('player-fide-id', player.fide_id);
+    set('player-fshr-classic', player.rating); 
+    set('player-fshr-rapid', player.rapid_rating); 
+    set('player-fshr-blitz', player.blitz_rating);
+    set('player-fide-classic', player.fide_rating); 
+    set('player-fide-rapid', player.fide_rapid); 
+    set('player-fide-blitz', player.fide_blitz);
 };
     
     const updateFilterInfo = () => { 
@@ -1141,30 +1155,30 @@ function renderComparisonView(data) {
     const { player1, player2, head_to_head, prizes_player1, prizes_player2 } = data;
 
     const createInfoCardHTML = (player) => {
-        const birthYear = player.age && player.age !== '—' ? (new Date().getFullYear()) - parseInt(player.age) : '—';
-        
-        const nameParts = player.name.split(' ');
-        const shortName = nameParts.length > 2 ? `${nameParts[0]} ${nameParts[1]}` : player.name;
+    const birthYear = player.age && player.age !== '—' ? (new Date().getFullYear()) - parseInt(player.age) : '—';
+    
+    const nameParts = player.name.split(' ');
+    const shortName = nameParts.length > 2 ? `${nameParts[0]} ${nameParts[1]}` : player.name;
 
-        // --- ДОБАВЛЯЕМ КНОПКУ ВНУТРЬ HTML-ШАБЛОНА ---
-        return `
-            <div class="report-info-card">
-                <h3 style="text-align: center;">${shortName}</h3>
-                <p><span>Год рождения:</span> <span>${birthYear}</span></p>
-                <p><span>Звание:</span> <span>${player.title || '—'}</span></p>
-                <p><span>Классика:</span> <span>${player.rating || '—'}</span></p>
-                <p><span>Рапид:</span> <span>${player.rapid_rating || '—'}</span></p>
-                <p><span>Блиц:</span> <span>${player.blitz_rating || '—'}</span></p>
-                <div class="text-center mt-4">
-                    <button 
-                        class="compare-button-styled re-compare-btn" 
-                        data-player-id="${player.id}">
-                        <i class="fa-solid fa-bolt"></i>
-                        <span>Сравнить</span>
-                    </button>
-                </div>
-            </div>`;
-    };
+    return `
+        <div class="report-info-card">
+            <h3 style="text-align: center;">${shortName}</h3>
+            <p><span>Год рождения:</span> <span>${birthYear}</span></p>
+            <p><span>Звание:</span> <span>${player.title || '—'}</span></p>
+            <p class="font-semibold border-t pt-2 mt-2"><span>Сумма очков:</span> <span>${player.raw_points || '—'}</span></p>
+            <p><span>Классика:</span> <span>${player.rating || '—'}</span></p>
+            <p><span>Рапид:</span> <span>${player.rapid_rating || '—'}</span></p>
+            <p><span>Блиц:</span> <span>${player.blitz_rating || '—'}</span></p>
+            <div class="text-center mt-4">
+                <button 
+                    class="compare-button-styled re-compare-btn" 
+                    data-player-id="${player.id}">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Сравнить</span>
+                </button>
+            </div>
+        </div>`;
+};
 
     const createComparisonTablesHTML = () => {
         const getRow = (label, val1, val2) => {
@@ -1274,9 +1288,7 @@ function renderComparisonView(data) {
         });
     }
 }
-// ================================================================
-// ЗАКОНЧИТЕ ВЫДЕЛЯТЬ ЗДЕСЬ
-// ================================================================
+
 // КОНЕЦ: ФИНАЛЬНАЯ ВЕРСИЯ ФУНКЦИИ ОТРИСОВКИ
     // КОНЕЦ: НОВЫЕ ФУНКЦИИ ДЛЯ СРАВНЕНИЯ
 

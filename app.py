@@ -65,31 +65,43 @@ DP_VALUES = {
 # Замените вашу старую функцию get_db_connection на эту
 # Замените вашу старую функцию get_db_connection на эту
 def get_db_connection():
+    # Пытаемся получить данные для подключения к MS SQL из переменных окружения
     db_server = os.environ.get('MSSQL_SERVER')
     db_user = os.environ.get('MSSQL_USER')
     db_password = os.environ.get('MSSQL_PASSWORD')
     db_name = os.environ.get('MSSQL_DATABASE')
 
+    # Проверяем, заданы ли все переменные для MS SQL
     if all([db_server, db_user, db_password, db_name]):
         try:
-            # Создаем строку подключения для ODBC драйвера
+            # Если да, ПЫТАЕМСЯ подключиться к MS SQL
+            app_logger.info(f"Попытка подключения к MS SQL серверу: {db_server}...")
             conn_str = (
                 f"DRIVER={{ODBC Driver 17 for SQL Server}};"
                 f"SERVER={db_server};"
                 f"DATABASE={db_name};"
                 f"UID={db_user};"
                 f"PWD={db_password};"
+                f"TrustServerCertificate=yes;" # Добавляем для надежности
             )
-            conn = pyodbc.connect(conn_str)
+            conn = pyodbc.connect(conn_str, timeout=5) # Добавляем тайм-аут в 5 секунд
+            app_logger.info("Успешное подключение к MS SQL Server.")
             return conn
         except Exception as e:
-            app_logger.error(f"Не удалось подключиться к MS SQL Server через pyodbc: {e}")
-            return None
-    else:
-        # Локальный fallback на SQLite остается без изменений
+            # Если подключиться не удалось, логируем ошибку и ПЕРЕХОДИМ ДАЛЬШЕ
+            app_logger.warning(f"Не удалось подключиться к MS SQL Server: {e}. Переключаемся на локальную базу SQLite.")
+    
+    # Этот код выполнится, если переменные для MS SQL не были заданы,
+    # ИЛИ если подключение к MS SQL не удалось.
+    # Это наш "запасной аэродром".
+    try:
+        app_logger.info("Подключение к локальной базе SQLite...")
         conn = sqlite3.connect(DATABASE_FILE)
         conn.row_factory = sqlite3.Row
         return conn
+    except Exception as e:
+        app_logger.error(f"Критическая ошибка: не удалось подключиться даже к локальной базе SQLite: {e}")
+        return None # Конечная точка, если ничего не работает
 
 def get_dp_for_performance(score_percentage):
     if score_percentage < 0 or score_percentage > 1: return 0 
@@ -959,6 +971,17 @@ def compare_players_api():
     if not player1_id or not player2_id:
         return jsonify({"error": "Требуется указать ID обоих игроков"}), 400
 
+    # --- НАЧАЛО ИЗМЕНЕНИЯ ---
+    # Загружаем данные о достижениях, чтобы взять оттуда сырые очки
+    try:
+        with open(ACHIEVERS_FILE, 'r', encoding='utf-8') as f:
+            all_achievers = json.load(f)
+        # Превращаем список в словарь для быстрого поиска
+        achievers_map = {str(p['id']): p for p in all_achievers}
+    except (FileNotFoundError, json.JSONDecodeError):
+        achievers_map = {}
+    # --- КОНЕЦ ИЗМЕНЕНИЯ ---
+
     players_data_list = load_players()
     players_data_map = {p['id']: p for p in players_data_list}
     player1_profile = players_data_map.get(player1_id)
@@ -967,6 +990,13 @@ def compare_players_api():
     if not player1_profile or not player2_profile:
         return jsonify({"error": "Один или оба игрока не найдены в базе данных"}), 404
 
+    # Добавляем сырые очки в профили игроков
+    player1_achievements = achievers_map.get(player1_id, {})
+    player2_achievements = achievers_map.get(player2_id, {})
+    player1_profile['raw_points'] = player1_achievements.get('raw_points', 0)
+    player2_profile['raw_points'] = player2_achievements.get('raw_points', 0)
+
+    # ... (остальная часть функции без изменений: подсчет личных встреч, медалей и т.д.) ...
     head_to_head = {"player1_wins": 0, "player2_wins": 0, "draws": 0}
     prizes_player1 = {"gold": 0, "silver": 0, "bronze": 0}
     prizes_player2 = {"gold": 0, "silver": 0, "bronze": 0}
@@ -974,20 +1004,24 @@ def compare_players_api():
     for tournament in all_tournaments:
         results = tournament.get("results", [])
         if not results: continue
-        fsr_id_to_seeding_num = {str(p.get("player_id")): p.get("seeding_number") for p in results if p.get("player_id")}
-        player1_seeding_num = fsr_id_to_seeding_num.get(player1_id)
-        player2_seeding_num = fsr_id_to_seeding_num.get(player2_id)
-        if player1_seeding_num and player2_seeding_num:
-            for p_res in results:
-                if str(p_res.get("player_id")) == player1_id:
-                    for game in p_res.get("games_played", []):
-                        if game.get("opponent_seeding_num") == player2_seeding_num:
-                            score = game.get("score", 0.0)
-                            if score == 1.0: head_to_head["player1_wins"] += 1
-                            elif score == 0.0: head_to_head["player2_wins"] += 1
-                            else: head_to_head["draws"] += 1
-                            break
-                    break 
+
+        p1_in_tournament = any(str(p.get("player_id")) == player1_id for p in results)
+        p2_in_tournament = any(str(p.get("player_id")) == player2_id for p in results)
+
+        if p1_in_tournament and p2_in_tournament:
+            fsr_id_to_seeding_num = {str(p.get("player_id")): p.get("seeding_number") for p in results if p.get("player_id")}
+            player1_seeding_num = fsr_id_to_seeding_num.get(player1_id)
+            player2_seeding_num = fsr_id_to_seeding_num.get(player2_id)
+            if player1_seeding_num and player2_seeding_num:
+                for p_res in results:
+                    if str(p_res.get("player_id")) == player1_id:
+                        for game in p_res.get("games_played", []):
+                            if game.get("opponent_seeding_num") == player2_seeding_num:
+                                score = game.get("score", 0.0)
+                                if score == 1.0: head_to_head["player1_wins"] += 1
+                                elif score == 0.0: head_to_head["player2_wins"] += 1
+                                else: head_to_head["draws"] += 1
+
         for p_res in results:
             place_str = str(p_res.get("place", "0")).strip()
             current_player_id = str(p_res.get("player_id"))
@@ -1005,8 +1039,7 @@ def compare_players_api():
         classic_r = int(player_profile['rating']) if str(player_profile['rating']).isdigit() else 0
         rapid_r = int(player_profile['rapid_rating']) if str(player_profile['rapid_rating']).isdigit() else 0
         blitz_r = int(player_profile['blitz_rating']) if str(player_profile['blitz_rating']).isdigit() else 0
-        if not any([classic_r, rapid_r, blitz_r]):
-            return 0
+        if not any([classic_r, rapid_r, blitz_r]): return 0
         if classic_r == 0: classic_r = (rapid_r + blitz_r) / 2 if rapid_r or blitz_r else 0
         if rapid_r == 0: rapid_r = (classic_r + blitz_r) / 2 if classic_r or blitz_r else 0
         if blitz_r == 0: blitz_r = (classic_r + rapid_r) / 2 if classic_r or rapid_r else 0
@@ -1074,9 +1107,11 @@ def get_all_achievers():
         return jsonify({"error": "Internal server error"}), 500
 
 # Эту функцию можно добавить после функции get_top_achievers
+# ЗАМЕНИТЕ ВАШУ СТАРУЮ ФУНКЦИЮ calculate_and_save_achievers_ranking НА ЭТУ
 def calculate_and_save_achievers_ranking():
     """
     Рассчитывает полный рейтинг достижений всех игроков и сохраняет его в JSON-файл.
+    Теперь считает и "сырые" очки, и "зачетные" (взвешенные).
     """
     app_logger.info("Начало полного пересчета рейтинга достижений...")
     try:
@@ -1085,12 +1120,13 @@ def calculate_and_save_achievers_ranking():
         players_map = {p['id']: p['name'] for p in players_list}
         player_stats = {}
 
-        points_by_tier = {
-            5: {"gold": 25, "silver": 18, "bronze": 12},
-            4: {"gold": 15, "silver": 10, "bronze": 7},
-            3: {"gold": 8, "silver": 5, "bronze": 3},
-            2: {"gold": 3, "silver": 2, "bronze": 1},
-            1: {"gold": 1, "silver": 0, "bronze": 0}
+        # Коэффициенты, основанные на силе ("звездности") турнира
+        points_multiplier_by_tier = {
+            5: 2.5, # 5 звезд
+            4: 2.0, # 4 звезды
+            3: 1.5, # 3 звезды
+            2: 1.2, # 2 звезды
+            1: 1.0  # 1 звезда
         }
 
         for tournament in tournaments:
@@ -1098,38 +1134,62 @@ def calculate_and_save_achievers_ranking():
             if not results: continue
 
             tier = get_tournament_tier(tournament)
-            points_map = points_by_tier.get(tier, points_by_tier[1])
+            multiplier = points_multiplier_by_tier.get(tier, 1.0)
 
             for res in results:
                 player_id = str(res.get("player_id"))
                 if not player_id or player_id not in players_map: continue
 
+                # Инициализируем статистику для нового игрока
                 if player_id not in player_stats:
                     full_name = players_map.get(player_id, "Неизвестный игрок")
-                    player_stats[player_id] = {'id': player_id, 'name': full_name, 'gold': 0, 'silver': 0, 'bronze': 0, 'points': 0}
-                
+                    player_stats[player_id] = {
+                        'id': player_id, 
+                        'name': full_name, 
+                        'gold': 0, 'silver': 0, 'bronze': 0, 
+                        'points': 0.0, # Здесь будут взвешенные очки
+                        'raw_points': 0.0 # Здесь будут "сырые" очки
+                    }
+
+                # Суммируем "сырые" очки
+                try:
+                    game_points = float(res.get("points", 0))
+                    player_stats[player_id]['raw_points'] += game_points
+                except (ValueError, TypeError):
+                    pass # Игнорируем, если очки - не число
+
+                # Суммируем "взвешенные" очки
+                player_stats[player_id]['points'] += (game_points * multiplier)
+
+                # Считаем медали, как и раньше
                 place = str(res.get("place", "0")).strip()
                 if place == "1":
                     player_stats[player_id]['gold'] += 1
-                    player_stats[player_id]['points'] += points_map["gold"]
                 elif place == "2":
                     player_stats[player_id]['silver'] += 1
-                    player_stats[player_id]['points'] += points_map["silver"]
                 elif place == "3":
                     player_stats[player_id]['bronze'] += 1
-                    player_stats[player_id]['points'] += points_map["bronze"]
-        
+
+        # Округляем очки до 2 знаков после запятой
+        for stats in player_stats.values():
+            stats['points'] = round(stats['points'], 2)
+            stats['raw_points'] = round(stats['raw_points'], 2)
+
         achievers_list = list(player_stats.values())
-        sorted_achievers = sorted(achievers_list, key=lambda p: (p['points'], p['gold'], p['silver'], p['bronze']), reverse=True)
-        
+        # Сортируем по взвешенным очкам, затем по золоту, серебру, бронзе
+        sorted_achievers = sorted(
+            achievers_list, 
+            key=lambda p: (p['points'], p['gold'], p['silver'], p['bronze']), 
+            reverse=True
+        )
+
         with open(ACHIEVERS_FILE, 'w', encoding='utf-8') as f:
             json.dump(sorted_achievers, f, ensure_ascii=False, indent=4)
-        
+
         app_logger.info(f"Рейтинг достижений успешно рассчитан и сохранен в {ACHIEVERS_FILE}. Всего игроков: {len(sorted_achievers)}")
 
     except Exception as e:
-        app_logger.error(f"Ошибка при расчете и сохранении рейтинга достижений: {e}", exc_info=True)    
-
+        app_logger.error(f"Ошибка при расчете и сохранении рейтинга достижений: {e}", exc_info=True)
 def record_successful_update():
     try:
         with open(LAST_UPDATE_TS_FILE, 'w') as f: f.write(datetime.now().isoformat())
