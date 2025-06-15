@@ -35,12 +35,16 @@ app_logger = logging.getLogger('ChessRatingsLive')
 app_logger.setLevel(logging.INFO)
 if app_logger.hasHandlers():
     app_logger.handlers.clear()
-handler = logging.FileHandler('update.log', encoding='utf-8')
-handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-app_logger.addHandler(handler)
+# Новый блок
+# Запись в файл (как и было)
+file_handler = logging.FileHandler('update.log', encoding='utf-8')
+file_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+app_logger.addHandler(file_handler)
 
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
+# Добавляем вывод в консоль
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(logging.Formatter('%(levelname)s - %(message)s'))
+app_logger.addHandler(stream_handler)
 
 BASE_DIR = os.path.dirname(__file__)
 JSON_FILE = os.path.join(BASE_DIR, 'players_kbr.json') 
