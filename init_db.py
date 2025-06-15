@@ -1,41 +1,56 @@
-# Файл: init_db.py (версия для pyodbc)
+# Файл: init_db.py (Простая версия для SQLite)
+import sqlite3
 import os
-import pyodbc
-from dotenv import load_dotenv
 
-load_dotenv()
+# Определяем имя файла базы данных
+DATABASE_FILE = os.path.join(os.path.dirname(__file__), 'chess_ratings.db')
 
-db_server = os.environ.get('MSSQL_SERVER')
-db_user = os.environ.get('MSSQL_USER')
-db_password = os.environ.get('MSSQL_PASSWORD')
-db_name = os.environ.get('MSSQL_DATABASE')
+# На всякий случай удаляем старый файл базы данных, чтобы начать с чистого листа
+if os.path.exists(DATABASE_FILE):
+    os.remove(DATABASE_FILE)
+    print(f"Старый файл '{DATABASE_FILE}' удален.")
 
-if not all([db_server, db_user, db_password, db_name]):
-    print("Ошибка: Не найдены все необходимые переменные окружения для MS SQL.")
-else:
-    try:
-        print(f"Подключаемся к MS SQL серверу: {db_server} через pyodbc...")
-        conn_str = (
-            f"DRIVER={{ODBC Driver 17 for SQL Server}};"
-            f"SERVER={db_server};"
-            f"DATABASE={db_name};"
-            f"UID={db_user};"
-            f"PWD={db_password};"
-        )
-        conn = pyodbc.connect(conn_str, autocommit=True)
-        cursor = conn.cursor()
+# SQL-команда для создания таблицы, адаптированная для SQLite
+sql_create_table = """
+CREATE TABLE players (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    fsr_id INTEGER UNIQUE NOT NULL,
+    fide_id INTEGER,
+    full_name TEXT NOT NULL,
+    birth_year INTEGER,
+    gender TEXT,
+    local_title TEXT,
+    fsr_official_title TEXT,
+    is_classic_champion INTEGER DEFAULT 0,
+    is_rapid_champion INTEGER DEFAULT 0,
+    is_blitz_champion INTEGER DEFAULT 0,
+    is_child INTEGER DEFAULT 0,
+    current_fsr_classic_rating INTEGER DEFAULT 0,
+    previous_fsr_classic_rating INTEGER DEFAULT 0,
+    current_fsr_rapid_rating INTEGER DEFAULT 0,
+    previous_fsr_rapid_rating INTEGER DEFAULT 0,
+    current_fsr_blitz_rating INTEGER DEFAULT 0,
+    previous_fsr_blitz_rating INTEGER DEFAULT 0,
+    current_fide_classic_rating INTEGER DEFAULT 0,
+    current_fide_rapid_rating INTEGER DEFAULT 0,
+    current_fide_blitz_rating INTEGER DEFAULT 0,
+    fsr_tournaments_played_count INTEGER DEFAULT 0,
+    last_profile_update_at TEXT
+);
+"""
 
-        print("Читаем файл schema.sql...")
-        with open('schema.sql', 'r', encoding='utf-8') as f:
-            # ODBC драйвер обычно хорошо работает с многокомандными скриптами
-            sql_script = f.read()
+try:
+    print(f"Создаем новую базу данных SQLite в файле '{DATABASE_FILE}'...")
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
 
-        print("Выполняем SQL-скрипт для создания таблиц...")
-        cursor.execute(sql_script)
+    print("Создаем таблицу 'players'...")
+    cursor.executescript(sql_create_table) # .executescript для выполнения скрипта
 
-        print("Таблицы успешно созданы!")
+    conn.commit()
+    print("База данных и таблица успешно созданы!")
 
-        cursor.close()
-        conn.close()
-    except Exception as e:
-        print(f"Произошла ошибка: {e}")
+    cursor.close()
+    conn.close()
+except Exception as e:
+    print(f"Произошла ошибка при создании базы SQLite: {e}")
